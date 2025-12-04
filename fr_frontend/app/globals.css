@@ -1,0 +1,1368 @@
+@import url('https://fonts.googleapis.com/css2?family=Twinkle+Star&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Orbit&family=Share+Tech&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&amily=Ms+Madi&display=swap');
+
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: silk
+};
+
+html, body {
+  font-family: "Ubuntu", sans-serif !important;
+}
+* {
+  font-family: inherit;
+}
+
+
+button {
+  border-radius: 8px;
+}
+
+.uploadedimagecard {
+  overflow: auto;
+  scrollbar-width: 1px;
+  -ms-overflow-style: none;
+}
+
+.cardImagecontainer{
+  gap: 25px;
+}
+
+.scale_up_title{
+    animation: scale-up 0.3s ease-in-out;
+}
+@keyframes scale-up {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.a {
+  text-decoration: none;
+  font-size: medium;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  color: oklch(42.134% 0.10923 48.864 / 0.692);
+}
+
+.a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.2s ease-in-out;
+}
+.a-after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.a:hover {
+  color: oklch(55.5% 0.163 48.998);
+}
+
+.a:hover::after {
+  height: 2px;
+  bottom: -5px;
+  transform: scaleX(1);
+}
+
+
+.header_down {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+  /* will-change: transform; */
+  transform: translateY(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.header_up {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+  /* will-change: transform; */
+  transform: translateY(-110%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.tooltip {
+  position: relative;
+}
+.tooltip::before {
+  content: "Appuyer hors de la pop up pour la refermer !";
+  position: absolute;
+  bottom: 25%;
+  right: 50%;
+  width: 100px;
+  font-weight: 500;
+  color: oklch(55.844% 0.15747 45.8 / 0.853);
+  background-color: white;
+  padding: 3px;
+  border-radius: 4px;
+  /* white-space: nowrap; */
+  font-size: 12px;
+  z-index: 10000;
+}
+
+/* Premier loader */
+
+/* From Uiverse.io by Shoh2008 */ 
+.loader1 {
+  width: 18px;
+  height: 18px;
+  box-shadow: 0 30px, 0 -30px;
+  border-radius: 4px;
+  background: currentColor;
+  display: block;
+  position: fixed;
+  left: calc(50% - 8px);
+  margin-top: 21.5vh;
+  z-index: 100;
+  transform: translate(-150%, -20px);
+  color: oklch(55.844% 0.15747 45.8 / 0.253);
+  box-sizing: border-box;
+  animation: animloader 2s ease infinite;
+}
+
+.loader1::after,
+.loader1::before {
+  content: '';
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+  box-shadow: 0 30px, 0 -30px;
+  border-radius: 4px;
+  background:currentColor;
+  color: oklch(55.844% 0.15747 45.8 / 0.253);
+  position: absolute;
+  left: 30px;
+  top: 0;
+  animation: animloader 1s ease infinite;
+}
+
+.loader1::before {
+  animation-delay: 0.04s;
+  left: 60px;
+}
+
+@keyframes animloader {
+  0% {
+    top: 0;
+    color: oklch(55.844% 0.15747 45.8 / 0.253);
+  }
+
+  50% {
+    top: 30px;
+    color: oklch(55.844% 0.15747 45.8 / 0.518);
+  }
+
+  100% {
+    top: 0;
+    color: oklch(55.844% 0.15747 45.8 / 0.253);
+  }
+}
+
+
+
+/* Second loader */
+
+/* From Uiverse.io by Juanes200122 */ 
+.loader2 {
+  color: #000;
+  width: 6px;
+  aspect-ratio: 1;
+  border-radius: 35%;
+  animation: l37-1 0.75s infinite linear alternate, l37-2 1.5s infinite linear;
+}
+@keyframes l37-1 {
+  0%,
+  20% {
+    box-shadow: 30px 0 0 3px, 10px 0 0 3px, -10px 0 0 3px, -30px 0 0 3px;
+  }
+  60%,
+  100% {
+    box-shadow: 12px 0 0 3px, 14px 0 0 6px, -14px 0 0 6px, -12px 0 0 3px;
+  }
+}
+
+@keyframes l37-2 {
+  0%,
+  25% {
+    transform: rotate(0);
+  }
+  50%,
+  100% {
+    transform: rotate(0.5turn);
+  }
+}
+
+
+/* Troisieme loader */
+
+/* From Uiverse.io by DevVaradPatil */ 
+.loader3 {
+  position: fixed;
+  top: 30vh;
+  left: calc(50% - 37.5px);
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  opacity: 95%;  
+  background: linear-gradient(45deg, transparent, transparent 4%, rgba(247, 245, 243, 0.83));
+  animation: glow 2s linear infinite;
+}
+@keyframes glow {
+  0% {
+    transform: rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    filter: hue-rotate(360deg);
+  }
+}
+.loader3::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  opacity: 95%;
+  background: rgba(247, 245, 243, 0.83);
+  border-radius: 50%;
+  z-index: 1000;
+}
+.loader3::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: linear-gradient(45deg, transparent, transparent 40%, #00d769);
+  border-radius: 50%;
+  z-index: 1000;
+  z-index: 1;
+  filter: blur(3px);
+}
+
+/* HTML: <div class="loader"></div> */
+.ediya {
+  width: fit-content;
+  font-size: 72px;
+  font-family: monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0000;
+  -webkit-text-stroke: 1px #000; /* augmenté de 1px à 2px pour la taille */
+  --g: conic-gradient(#000 0 0) no-repeat text;
+  background: var(--g) 0,var(--g) 1ch,var(--g) 2ch,var(--g) 3ch,var(--g) 4ch,var(--g) 5ch,var(--g) 6ch;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: 
+    l118-0 2.4s linear infinite,
+    l118-1 4.8s linear infinite;
+}
+.ediya:before {
+  content: "";
+}
+@keyframes l118-0 {
+  0%     {background-size: 1ch 0   ,1ch 0   ,1ch 0   ,1ch 0   ,1ch 0   ,1ch 0   ,1ch 0   }
+  14.28% {background-size: 1ch 100%,1ch 50% ,1ch 0   ,1ch 0   ,1ch 0   ,1ch 0   ,1ch 0   }
+  28.57% {background-size: 1ch 100%,1ch 100%,1ch 50% ,1ch 0   ,1ch 0   ,1ch 0   ,1ch 0   }
+  42.85% {background-size: 1ch 100%,1ch 100%,1ch 100%,1ch 50% ,1ch 0   ,1ch 0   ,1ch 0   }
+  57.14% {background-size: 1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50% ,1ch 0   ,1ch 0   }
+  71.43% {background-size: 1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50% ,1ch 0   }
+  85.71% {background-size: 1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50% }
+  100%   {background-size: 1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%}
+}
+@keyframes l118-1 {
+  0%,50%    {background-position-y: 100%}
+  50.01%,to {background-position-y: 0   }
+}
+
+/* HTML: <div class="loader"></div> */
+.ediya1 {
+  width: fit-content;
+  /* font-size: 40px;
+  font-family: system-ui,sans-serif; */
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0000;
+  -webkit-text-stroke: 1px #4b4743;
+  background: 
+    conic-gradient(from -135deg at 100% 50%, #4b4743 90deg,#0000 0) text no-repeat,
+    conic-gradient(from -135deg at 1lh  50%,#0000 90deg,#4b4743 0) text no-repeat;
+  animation: l6 3.5s linear infinite;
+}
+.ediya1:before {
+  content: "";
+}
+@keyframes l6 {
+  0%     {background-size: 0                200%;background-position:0 0   ,100% 0   }
+  50%    {background-size: calc(60% + .5lh) 200%;background-position:0 0   ,100% 0   }
+  50.01% {background-size: calc(60% + .5lh) 200%;background-position:0 100%,100% 100%}
+  100%   {background-size: 0                200%;background-position:0 100%,100% 100%}
+}
+
+
+/* HTML: <div class="loader"></div> */
+.ediya2 {
+  width: fit-content;
+  /* font-size: 40px;
+  font-family: system-ui,sans-serif; */
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0000;
+  -webkit-text-stroke: 1px #000;
+  background:
+    radial-gradient(0.71em at 50% 1em,#000 99%,#0000 101%) calc(50% - 1em) 1em/2em 200% repeat-x text,
+    radial-gradient(0.71em at 50% -0.5em,#0000 99%,#000 101%) 50% 1.5em/2em 200% repeat-x text;
+  animation: 
+    l10-0 .8s linear infinite alternate,
+    l10-1  4s linear infinite;
+}
+.ediya2:before {
+  content: "";
+}
+@keyframes l10-0 {
+  to {background-position-x: 50%,calc(50% + 1em)}
+}
+@keyframes l10-1 {
+  to {background-position-y: -.5em,0}
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader8 {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;
+  color: #ffffff00;
+  -webkit-text-stroke: 1px #4b4743;
+  --g:conic-gradient(#4b4743 0 0) no-repeat text;
+  background:var(--g) 0,var(--g) 1ch,var(--g) 2ch,var(--g) 3ch,var(--g) 4ch,var(--g) 5ch,var(--g) 6ch, var(--g) 7ch, var(--g) 8ch, var(--g) 9ch, var(--g) 10ch,
+   var(--g) 11ch, var(--g) 12ch, var(--g) 13ch, var(--g) 14ch,var(--g) 15ch,  var(--g) 16ch,  var(--g) 17ch,  var(--g) 18ch,  var(--g) 19ch,  var(--g) 20ch,  
+   var(--g) 21ch,  var(--g) 22ch,  var(--g) 23ch,  var(--g) 24ch,  var(--g) 25ch, var(--g) 26ch,  var(--g) 27ch,  var(--g) 28ch,  var(--g) 29ch;
+  
+   animation: 
+    l18-0 6s linear infinite alternate,
+    l18-1 3s linear infinite;
+}
+
+@keyframes l18-0 {
+  0%     {background-size: 
+    1ch 0,1ch 0, 1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  3.33%  {background-size: 
+    1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  6.67%  {background-size: 
+    1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  10%    {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  13.33% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  16.67% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  20%    {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  23.33% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  26.67% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  30%    {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  33.33% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  36.67% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  40%    {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  43.33% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  46.67% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  50%    {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  53.33% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  56.67% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  60%    {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  63.33% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,
+    1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  66.67% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  70%    {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  73.33% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  76.67% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  80%    {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  83.33% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0,1ch 0}
+  
+  86.67% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0,1ch 0}
+  
+  90%    {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0,1ch 0}
+  
+  93.33% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%,1ch 0}
+  
+  96.67% {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 50%}
+  
+  100%   {background-size: 
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,
+    1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%,1ch 100%}
+}
+
+
+@keyframes l18-1 {
+  0%,50%    {background-position-y: 100%}
+  50.01%,to {background-position-y: 0   }
+}
+
+
+
+
+.H1 {
+  font-size: 9vmin;
+  color: #4b474372;
+  text-align: left;
+  font-weight: 700;
+  /* margin: 1rem 0 1rem 2rem; */
+}
+
+/* Typewriter effect 1 */
+@keyframes typing {
+  /* Phrase 1: "avec précision" (0% -> 26%) */
+  0%   { content: ""; }
+  2%   { content: "a"; }
+  4%   { content: "av"; }
+  6%   { content: "ave"; }
+  8%   { content: "avec"; }
+  10%  { content: "avec p"; }
+  12%  { content: "avec pr"; }
+  14%  { content: "avec pré"; }
+  16%  { content: "avec préc"; }
+  18%  { content: "avec préci"; }
+  20%  { content: "avec précis"; }
+  22%  { content: "avec précisi"; }
+  24%  { content: "avec précisio"; }
+  26%  { content: "avec précision"; }
+
+  /* Pause */
+  30%  { content: ""; }
+
+  /* Phrase 2: "rapidement et facilement" (32% -> 76%) */
+  40%  { content: ""; }
+  42%  { content: "r"; }
+  44%  { content: "ra"; }
+  46%  { content: "rap"; }
+  48%  { content: "rapi"; }
+  50%  { content: "rapid"; }
+  52%  { content: "rapide"; }
+  54%  { content: "rapidem"; }
+  56%  { content: "rapideme"; }
+  58%  { content: "rapidemen"; }
+  60%  { content: "rapidement"; }
+
+  /* Pause */
+  
+
+  /* Phrase 3: "et corriger les prédictions" (80% -> 100%) */
+  74%  { content: ""; }
+  76%  { content: "e"; }
+  78%  { content: "et"; }
+  80%  { content: "et "; }
+  82%  { content: "et f"; }
+  84%  { content: "et fa"; }
+  86%  { content: "et fac"; }
+  88%  { content: "et faci"; }
+  90%  { content: "et facil"; }
+  92%  { content: "et facile"; }
+  94%  { content: "et facilem"; }
+  96%  { content: "et facileme"; }
+  98%  { content: "et facilemen "; }
+  100%  { content: "et facilement"; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter {
+  /* text-align: center; */
+  --caret: currentcolor;
+}
+
+.typewriter::before {
+  content: "";
+  animation: typing 13s infinite;
+}
+
+.typewriter::after {
+  content: "";
+  border-right: 20px solid var(--caret);
+  animation: blink 0.5s linear infinite;
+}
+
+.typewriter.thick::after {
+  border-right: 1ch solid var(--caret);
+}
+
+
+
+@media (prefers-reduced-motion) {
+  .typewriter::after {
+    animation: none;
+  }
+  
+  @keyframes sequencePopup {
+    0%, 100% { content: "developer"; }
+    25% { content: "writer"; }
+    50% { content: "reader"; }
+    75% { content: "human"; }
+  }
+
+  .typewriter::before {
+    content: "developer";
+    animation: sequencePopup 12s linear infinite;
+  }
+}
+
+
+
+
+
+/* Grid */
+
+.background-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: max-content;
+  z-index: -1000;
+  
+  /* Crée la grille avec des dégradés linéaires */
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.114) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.114) 1px, transparent 1px);
+  
+  /* Taille de la grille - ajuste selon tes besoins */
+  background-size: 70px 70px;
+  
+  /* Position de départ */
+  background-position: center center;
+}
+
+/* Version avec des points */
+.background-dots {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  
+  background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  background-position: center center;
+  background-color: #ffffff;
+}
+
+
+
+
+
+/* HTML: <div class="grid-lines"></div> */
+.grid-lines {
+  --s: 80px;  /* control the size of the grid */
+  --n: 4;     /* control the granularity */
+  --t: 1.7px;   /* the thickness */
+  --g: 10px;  /* the gap between dashes */
+  
+  --c:#55627034 25%,#0000 0;
+  background: 
+    conic-gradient(at var(--g) var(--t),var(--c))
+     calc((var(--s)/var(--n) - var(--g) + var(--t))/2) 0/
+     calc(var(--s)/var(--n)) var(--s),
+    conic-gradient(from 180deg at var(--t) var(--g),var(--c))
+     0 calc((var(--s)/var(--n) - var(--g) + var(--t))/2)/
+     var(--s) calc(var(--s)/var(--n));
+  /* you probably don't need to set any size in your case */
+  width:100%;
+  height:  max-content;
+  z-index: -1000;
+}
+
+
+/* HTML: <div class="grid-lines"></div> */
+.grid-lines1 {
+  --s: 80px;  /* control the size of the grid */
+  --t: 2px;   /* the thickness */
+
+  background:  
+    conic-gradient(from 90deg at var(--t) var(--t),#0000 25%,#55627034 0)
+     0 0/var(--s) var(--s);
+  /* you probably don't need to set any size in your case */
+  width:100%;
+  height:  max-content;
+  z-index: -1000;
+}
+
+
+
+.card_up{
+  animation: cardup 1.2s ease-in-out;
+  animation-fill-mode: both;
+  will-change: transform;
+}
+@keyframes cardup {
+  0%{
+   transform: translateY(100vh) scale(0);
+  }
+  25% {
+   transform: translateY(70vh) scale(0.25);
+  }
+  50%{
+   transform: translateY(30vh) scale(0.75);
+  }
+  100% {
+   transform: translateY(0vh) scale(1);
+  }
+}
+
+
+
+.slide_up{
+  animation: slideup 1.8s ease-in-out;
+  animation-fill-mode: both;
+  will-change: transform;
+}
+@keyframes slideup {
+  0%{
+    opacity: 0;
+    transform: translateY(25vh);
+  }
+  25% {
+    opacity: 0.5;
+    transform: translateY(15vh);
+  }
+  50%{
+    opacity: 0.75;
+    transform: translateY(10vh);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0vh);
+  }
+}
+
+/* #f7f5f3 */
+.gradient-text {
+  background-image: linear-gradient(to bottom, #4b4743, #f3ede9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; 
+  color: transparent;
+}
+
+.introduce_vid{
+  border-radius: 150px;
+  border-radius: 19% 19% 19% 19% / 19% 19% 19% 19% ;
+  /* border-radius: 39% 39% 39% 39% / 20% 20% 20% 20% ; */
+  /* width: 75vw; */
+  /* height: 115vh; */
+  /* background-image: url(./assets/the-simpsons-3840x2160-9426.jpg); */
+  /* background-size: cover; */
+  /* animation: morph 8s ease-in-out infinite ; */
+}
+
+@keyframes morph {
+  0% {border-radius: 26% 74% 22% 78% / 68% 39% 61% 32% ;} 
+  25% {border-radius: 52% 48% 22% 78% / 50% 39% 61% 50% ;} 
+  50% {border-radius: 74% 26% 58% 42% / 38% 83% 17% 62% ;} 
+  75% {border-radius: 44% 56% 36% 64% / 56% 32% 68% 44% ;} 
+  100% {border-radius: 26% 74% 22% 78% / 68% 39% 61% 32% ;} 
+}
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+
+
+
+@keyframes tadA {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  10%,
+  20% {
+    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+  }
+
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+
+  40%,
+  60%,
+  80% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.tada {
+  animation: tadA 2.5s ease-in-out infinite;
+}
+
+.animate{
+  animation: tadA 2.5s ease-in-out infinite;
+}
+
+
+
+
+
+/* Variables CSS pour les couleurs */
+:root {
+  --primary-color: #2d3748;
+  --accent-color: #4a5568;
+  --background-color: #ffffff;
+  --text-color: #1a202c;
+  --border-color: #e2e8f0;
+  --hover-color: #4a5568;
+}
+
+/* Style principal de la carte */
+.tour-card {
+  position: relative;
+  background: var(--background-color);
+  border-radius: 12px;
+  overflow: hidden;
+  /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); */
+  transition: all 0.3s ease;
+}
+
+.tour-card:hover {
+  transform: translateY(-4px);
+  /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); */
+}
+
+/* En-tête avec le lien "More about tours" */
+.tour-header {
+  position: absolute ;
+  top: 0;
+  right: 0;
+  width: 9em;
+  height: 3em;
+  background-color: #f7f4f2;
+  border-bottom-left-radius: 13px;
+  /* padding: 2px; */
+  /* justify-content: center; */
+  text-align: center;
+  align-items: start;
+  z-index: 10;
+}
+.tour-header::before {
+  content: "iho";
+  position: relative;
+  color: transparent;
+  top: 1.8px;
+  right: 86.8px;
+  height: 7vh;
+  width: 12vw;
+  -webkit-mask: radial-gradient(circle at 15% 84%, transparent 0 29px, black 29px);
+  mask: radial-gradient(circle at 15% 84%, transparent 0 29px, black 29px);
+  background-color: #f7f4f2;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.tour-header::after {
+  content: "iho";
+  position: relative;
+  color: transparent;
+  top: -13.8px;
+  right: -57px;
+  height: 7vh;
+  width: 12vw;
+  -webkit-mask: radial-gradient(circle at 14% 83%, transparent 0 29px, black 29px);
+  mask: radial-gradient(circle at 14% 83%, transparent 0 29px, black 29px);
+  background-color: #f7f4f2;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+}
+
+.more-link {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  /*margin: 5px ; -25px */  
+  border-radius: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 650;
+  color: #4b4743;
+  border: 2px solid #4b4743;
+  box-shadow: 0px 3px 3px #b3aba1f7;
+  padding: 3px;
+  width: 7em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.more-link:hover {
+  background-color: #4b4743;
+  color: #f3ede9;
+  border-color: #4b4743;
+}
+
+/* Conteneur d'image */
+.tour-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.tour-image {
+  object-fit: cover;
+  background-size: center;
+  transition: transform 0.5s ease;
+}
+
+.tour-card:hover .tour-image {
+  transform: scale(1.05);
+}
+
+/* Overlay d'image pour améliorer la lisibilité du texte */
+.image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(transparent, rgba(2, 22, 70, 0.804));
+  z-index: 1;
+}
+.PredExs_overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 15%;
+  border-radius: 16px;
+  background: linear-gradient(-90deg, #021646, #02164670, #ffffff00);
+  z-index: 1;
+}
+.PredExs_overlay1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 15%;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #021646, #02164670, #ffffff00);
+  z-index: 1;
+}
+/* Tag #Hiking en bas à gauche */
+.tour-tag {
+  position: absolute;
+  bottom: -0.2px;
+  left: -0.3px;
+  background-color: #f7f4f2;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 13px;
+  padding: 1px;
+  z-index: 10;
+}
+.tour-tag::before {
+  content: "iho";
+  position: relative;
+  color: transparent;
+  bottom: 40px;
+  left: -1px;
+  height: 7vh;
+  width: 12vw;
+  -webkit-mask: radial-gradient(circle at 0% 0%, transparent 30px 0, black 30px);
+  mask: radial-gradient(circle at 88% 14%, transparent 30px 0, black 30px);
+  background-color: #f7f4f2;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+}
+.tour-tag::after {
+  content: "iho";
+  position: relative;
+  color: transparent;
+  bottom: -12px;
+  left: 30px;
+  height: 7vh;
+  width: 12vw;
+  -webkit-mask: radial-gradient(circle at 0% 0%, transparent 0 30px, black 30px);
+  mask: radial-gradient(circle at 90% 12%, transparent 0 30px, black 30px);
+  background-color: #f7f4f2;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+}
+
+.hiking-tag {
+  display: inline-block;
+  background: var(--background-color);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  margin: 5px -30px;
+  border-radius: 16px;
+  color: var(--primary-color);
+  font-weight: 650;
+  text-decoration: none;
+  border: 1.6px solid var(--primary-color);
+  transition: all 0.2s ease;
+}
+
+.hiking-tag:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* Version alternative avec effet de carte plus prononcé */
+.tour-card-alternative {
+  position: relative;
+  background: var(--background-color);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.tour-card-alternative:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+}
+
+/* Style minimaliste */
+.tour-card-minimal {
+  position: relative;
+  background: var(--background-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid var(--border-color);
+}
+
+.tour-card-minimal:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .tour-card,
+  .tour-card-alternative,
+  .tour-card-minimal {
+    max-width: 100%;
+    margin: 0 16px;
+  }
+
+  
+  .more-link {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+  
+  .hiking-tag {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
+
+
+
+
+@media screen and (max-width:425px){
+  .md_essayer_text {
+    font-size: 18px;
+  }  
+  .md_btn_essayer {
+    top: -5%;
+    right: 2vw;
+  }
+  .md_comparer {
+    flex-direction: column;
+  }
+  .md_predex {
+    display: none;
+  }
+  
+  .md_predex1 {
+    display: flex;
+    width: 86vw;
+    height: 95vh;
+  }
+  .md_commencer_container {
+    width: 90%;
+    height: fit-content;
+    gap: 22px;
+    flex-direction: column;
+
+  }
+  .tour-image{
+    /* display: none; */
+    height: 65vh;
+    width: 96vw;
+  }
+  .tour-image-container{
+    height: 65vh;
+    width: 96vw;
+  }
+  .tour-card{
+    height: 65vh;
+    width: 96vw;
+  }
+  .i_title{
+    left: 60%;
+  }
+  
+}
+@media screen and (max-width:485px){
+  .md_body{
+    width: 90vw;
+    height: fit-content;
+    flex-direction: column;
+    gap: 30px;    
+  }
+  .md_preds{
+    width: 95.0vw;
+    height: 100vh;
+    margin: 0px;
+  }
+  .md_uploads{
+    width: 85vw;
+    height: 100vh;
+    margin: 0px;
+  }
+  .tour-tag::before {
+    bottom: 30px;
+    left: -1px;
+    -webkit-mask: radial-gradient(circle at 0% 0%, transparent 30px 0, black 30px);
+    mask: radial-gradient(circle at 88% 14%, transparent 30px 0, black 30px);
+  }
+  .md_commencer_btn {
+    font-size: 17px;
+  }
+  .md_commencer_text{
+    width: 85.0vw;
+    font-size: 17px;
+  }
+  .md_header {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+  }
+  .md_navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .i_title{
+    /* bottom: ; */
+    left: 70%;
+  }
+}
+@media screen and (max-width:950px) and (min-width:767px){
+  .md_commencer_container {
+    width: 96%;
+    gap: 22px;
+
+  }
+  
+}
+@media screen and (min-width:486px){
+  .i_title{
+    /* bottom: ; */
+    left: 75%;
+  }
+  
+}
+
+@media screen and (max-width:445px){
+  .i_title{
+    /* bottom: ; */
+    left: 65%;
+  } 
+}
+@media screen and (max-width:375px){
+  .i_title{
+    /* bottom: ; */
+    left: 53%;
+  }    
+}
+@media screen and (max-width:305px){
+  .i_title{
+    /* bottom: ; */
+    left: 45%;
+  } 
+  .cardImagesize{
+    width: 43vw;
+    height: 38vh;
+  }
+  .cardImagecontainer{
+    gap: 5px;
+  }  
+}
+@media screen and (max-width:485px) and (min-width:305px){
+  .cardImagesize{
+    width: 40vw;
+    height: 35vh;
+  } 
+}
+@media screen and (max-width:700px) and (min-width:485px){
+  .md_body{
+    width: 90vw;
+    height: fit-content;
+    flex-direction: column;
+    gap: 30px;    
+  }
+  
+  .md_preds{
+    width: 75vw;
+    height: 110vh;
+    margin: 0px;
+  }
+  .md_uploads{
+    width: 65vw;
+    height: 100vh;
+    margin: 0px;
+  }
+  .cardImagesize{
+    width: 30vw;
+    height: 40vh;
+  } 
+}
+@media screen and (max-width:990px) and (min-width:769px){
+  .md_body{
+    width: 90vw;
+    height: fit-content;
+  }
+  .md_preds{
+    width: 85vw;
+    margin-right: 22px;
+  }
+}
+@media screen and (max-width: 769px) and (min-width:700px){
+  .md_preds{
+    width: 65vw;
+    margin-right: 22px;
+  }
+}
+@media screen and (max-width:768px) and (min-width:426px){
+  .md_body{
+    width: 90vw;
+    height: fit-content;
+  }
+  .md_essayer_text {
+    font-size: 20px;
+  }
+  .md_btn_essayer {
+    top: -7%;
+    right: 2vw;
+    width: 18vw;
+  }
+  .md_comparer {
+    flex-direction: column;
+  }
+  .tour-image {
+    height: 85vh;
+  }
+  
+  .md_commencer_container {
+    width: 85.0%;
+    height: fit-content;
+    gap: 22px;
+    flex-direction: column;
+
+  }
+  .tour-card{
+    height: 85vh;
+    width: 80vw;
+  }
+  .md_commencer_text{
+    width: 80vw;
+    font-size: 18px;
+  }
+  .md_predex {
+    display: none;
+  }
+  .md_predex1 {
+    width: 75vw;
+    height: 85vh;
+  }
+  
+}
+@media screen and (min-width:769px){
+  
+  .md_predex1 {
+    display: none;
+  }
+  .md_essayer_text {
+    font-size: 24px;
+
+  }
+  .md_btn_essayer {
+    top: -7%;
+    right: 2vw;
+    width: 18vw;
+  }
+  .md_comparer {
+    flex-direction: row;
+  }
+}

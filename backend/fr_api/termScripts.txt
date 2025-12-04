@@ -1,0 +1,23 @@
+from fr_api.models import UploadImageAndPredict
+from django.core.files.storage import default_storage
+qs = UploadImageAndPredict.objects.all()
+for obj in qs:
+    try:
+        if obj.img1 and default_storage.exists(obj.img1.name):
+            default_storage.delete(obj.img1.name)
+    except Exception as e:
+        print("Erreur suppression img1:", e)
+    try:
+        if obj.img2 and default_storage.exists(obj.img2.name):
+            default_storage.delete(obj.img2.name)
+    except Exception as e:
+        print("Erreur suppression img2:", e)
+qs.delete()
+
+
+
+from django.db import connection
+from fr_api.models import UploadImageAndPredict
+
+with connection.cursor() as cursor:
+    cursor.execute("DELETE FROM sqlite_sequence WHERE name='fr_api_uploadimageandpredict';")
