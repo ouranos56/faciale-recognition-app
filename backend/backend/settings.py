@@ -149,10 +149,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configuration Email
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'frinnovagenbj@gmail.com'
-EMAIL_HOST_PASSWORD = "lxho xvtz qkfn urhd"  # Mot de passe d'application Google
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # L'adresse d'envoi par défaut
+EMAIL_BACKEND = config("EMAIL_BACKEND")
+EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_PORT = config("EMAIL_PORT")
+EMAIL_USE_TLS = config("EMAIL_USE_TLSTrue")
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")   # Mot de passe d'application Google
+DEFAULT_FROM_EMAIL = config("EMAIL_HOST_USER")  # L'adresse d'envoi par défaut
