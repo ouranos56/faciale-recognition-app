@@ -1,14 +1,11 @@
 "use client"
-import React, { SetStateAction, useEffect, useState } from "react";
-import AboutUs from "../AboutUs";
-import ContactUs from "../ContactUs";
+import React, { useEffect, useState } from "react";
+import AboutUs from "./AboutUs";
+import ContactUs from "./ContactUs";
 import PriacySecure from "./PriacySecure";
 import toast from "react-hot-toast";
 
 export default function Footer() {
-    // function setSend(value: SetStateAction<{ success?: string | undefined; error?: string | undefined; }>): void {
-    //     throw new Error("Function not implemented.");
-    // }
 
     const [send, setSend] = useState<{ success?: string; error?: string }>({});
       useEffect(() => {

@@ -915,12 +915,12 @@ button {
   content: "iho";
   position: relative;
   color: transparent;
-  top: -13.8px;
-  right: -57px;
+  top: -14.6px;
+  right: -58px;
   height: 7vh;
   width: 12vw;
-  -webkit-mask: radial-gradient(circle at 14% 83%, transparent 0 29px, black 29px);
-  mask: radial-gradient(circle at 14% 83%, transparent 0 29px, black 29px);
+  -webkit-mask: radial-gradient(circle at 18% 83%, transparent 0 26px, black 26px);
+  mask: radial-gradient(circle at 18% 83%, transparent 0 26px, black 26px);
   background-color: #f7f4f2;
   padding: 4px;
   justify-content: center;
@@ -1013,12 +1013,12 @@ button {
   content: "iho";
   position: relative;
   color: transparent;
-  bottom: 40px;
-  left: -1px;
+  bottom: 37px;
+  left: -2px;
   height: 7vh;
   width: 12vw;
-  -webkit-mask: radial-gradient(circle at 0% 0%, transparent 30px 0, black 30px);
-  mask: radial-gradient(circle at 88% 14%, transparent 30px 0, black 30px);
+  -webkit-mask: radial-gradient(circle at 0% 0%, transparent 27px 0, black 27px);
+  mask: radial-gradient(circle at 88% 14%, transparent 27px 0, black 27px);
   background-color: #f7f4f2;
   padding: 4px;
   justify-content: center;
@@ -1028,12 +1028,12 @@ button {
   content: "iho";
   position: relative;
   color: transparent;
-  bottom: -12px;
-  left: 30px;
+  bottom: -13px;
+  left: 28px;
   height: 7vh;
   width: 12vw;
-  -webkit-mask: radial-gradient(circle at 0% 0%, transparent 0 30px, black 30px);
-  mask: radial-gradient(circle at 90% 12%, transparent 0 30px, black 30px);
+  -webkit-mask: radial-gradient(circle at 0% 0%, transparent 0 27px, black 27px);
+  mask: radial-gradient(circle at 90% 12%, transparent 0 27px, black 27px);
   background-color: #f7f4f2;
   padding: 4px;
   justify-content: center;
@@ -1178,7 +1178,7 @@ button {
     gap: 30px;    
   }
   .md_preds{
-    width: 95.0vw;
+    width: 93vw;
     height: 100vh;
     margin: 0px;
   }
@@ -1217,6 +1217,27 @@ button {
     /* bottom: ; */
     left: 70%;
   }
+  .btnscroll{
+    right: 1%;
+  }
+  .modal_md{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 93.5vh;
+    right: 6vw;
+    z-index:  10000;
+  } 
+  .modal_btn{
+    font-size: 0px;
+    height: 28px;
+    width: 28px;
+    border: 1.5px solid oklch(70.4% 0.191 22.216);
+    border-radius: 28px;
+    color: oklch(70.4% 0.191 22.216);
+  }
 }
 @media screen and (max-width:950px) and (min-width:767px){
   .md_commencer_container {
@@ -1229,7 +1250,7 @@ button {
 @media screen and (min-width:486px){
   .i_title{
     /* bottom: ; */
-    left: 75%;
+    left: 70%;
   }
   
 }
@@ -1264,8 +1285,9 @@ button {
     width: 40vw;
     height: 35vh;
   } 
+   
 }
-@media screen and (max-width:700px) and (min-width:485px){
+@media screen and (max-width:769px) and (min-width:485px){
   .md_body{
     width: 90vw;
     height: fit-content;
@@ -1288,7 +1310,7 @@ button {
     height: 40vh;
   } 
 }
-@media screen and (max-width:990px) and (min-width:769px){
+@media screen and (max-width:990px) and (min-width:770px){
   .md_body{
     width: 90vw;
     height: fit-content;
@@ -1297,11 +1319,23 @@ button {
     width: 85vw;
     margin-right: 22px;
   }
+  .md_uploads{
+    width: 45vw;
+  }
 }
-@media screen and (max-width: 769px) and (min-width:700px){
+/* @media screen and (max-width: 769px) and (min-width:700px){
   .md_preds{
     width: 65vw;
     margin-right: 22px;
+  }
+  
+} */
+@media screen and (max-width: 990px) and (min-width:769px){
+  .md_body{
+    gap: 0;
+  }
+  .md_preds{
+    margin-right: 32px;
   }
 }
 @media screen and (max-width:768px) and (min-width:426px){

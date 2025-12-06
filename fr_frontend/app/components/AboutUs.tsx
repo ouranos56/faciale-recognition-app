@@ -1,9 +1,10 @@
 "use client"
 
-import "./globals.css";
+import "../globals.css";
 import { useEffect, useRef, useState } from "react";
-import HellohHand from "./assets/wired-outline-2716-logo-clubhouse-hover-pinch.gif";
+import HellohHand from "../assets/wired-outline-2716-logo-clubhouse-hover-pinch.gif";
 import Image from "next/image";
+import { X } from "lucide-react";
 
 export default function AboutUs() {
 
@@ -28,6 +29,22 @@ export default function AboutUs() {
             }, 2500);
         }
     }, [title_out]);
+
+    const [mobile_width, setMobile_width] = useState<boolean>(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            const isMobile = window.innerWidth <= 485;
+            setMobile_width(isMobile);
+            console.log(isMobile)
+        };
+
+        checkMobile();
+
+        window.addEventListener('resize', checkMobile);
+
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
     return (
         <div>
             <a className="link link-hover a" onClick={
@@ -93,8 +110,12 @@ export default function AboutUs() {
                 </div>
 
 
-                <form method="dialog" className="modal-backdrop">
-                    <button>close</button>
+                <form method="dialog" className="modal-backdrop modal_md">
+                    <button className="modal_btn  text-center justify-center items-center"
+                    >
+                        close
+                        <X className={`${mobile_width} ? "flex" : "hidden" relative bottom-[75%] left-[1.5px] text-2xl text-red-400`} />
+                    </button>
                 </form>
             </dialog>
 

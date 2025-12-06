@@ -496,7 +496,7 @@ export default function Home() {
       {/* ------------------------ Get Started -------------------- */}
 
 
-      <div className={`w-[75vw] md_body px48 bg-[#f7f5f35b] flex md:flex-row justify-center items-center md:gap-12 ${frpredictions.length !== 0 || upLoadedImages.length !== 0 ? "min-h-screen py-20" : "py-6 h-svh "} `}>
+      <div className={`w-[75vw] md_body px48 bg-[#f7f5f35b] flex md:flex-row justify-between items-center md:gap-12 ${frpredictions.length !== 0 || upLoadedImages.length !== 0 ? "min-h-screen py-20" : "py-6 h-svh "} `}>
         <div className="loader z-20"></div>
 
         <div className={`bg-base-100 md_preds shadow-xl rounded-box border-3 border-base-content/12 justify-center items-center gap-4 p-2 overflow-auto md:overflow-scroll uploadedimagecard md:w-[80%] ${frpredictions.length === 0 ? "max-h-min" : " h-[90vh]"}`}
@@ -577,8 +577,8 @@ export default function Home() {
                     />
                   )}
                 </div>
-              // h-86
-              : (<div className="border-dashed border-accent/15 border-bb4e0041 border-4 rounded-2xl overflow-auto md:overflow-scroll uploadedimagecard max-h-[55vh]">
+              
+              : (<div className="border-dashed border-accent/15 border-bb4e0041 border-4 rounded-2xl overflow-auto md:overflow-scroll uploadedimagecard max-h-[55vh] md_uploads_c w-[85%] ">
                 {
                   uploading
                     ? <div className="grid grid-cols-2 gap-2.5">
@@ -600,14 +600,14 @@ export default function Home() {
           <div className="flex flex-col justify-center items-center gap-4">
 
             <select
-              className="select select-sm rounded-xl px-2 focus-within:border-0"
+              className="select select-sm font-medium rounded-xl px-2 focus-within:border-0 cursor-pointer"
               ref={selectedModelRef}
               value={selectedmodel}
               onChange={(e) => { setSelectedmodel(Number(e.target.value)) }}
             >
               <option disabled={true}>Models</option>
-              <option defaultChecked value={0} >Ediya s.2</option>
-              <option value={1} >Ediya s.06</option>
+              <option className="checked:text-[#bb4d00]" defaultChecked value={0} >Ediya s.2</option>
+              <option className="checked:text-[#bb4d00]" value={1} >Ediya s.06</option>
             </select>
 
             <div className="flex flex-row justify-center w-full items-center gap-4">
@@ -637,6 +637,7 @@ export default function Home() {
                   setUpLoadedImages([]);
                   setselectedImages([]);
                 }}
+                title="Tout retirer"
               >
                 <BrushCleaning size={17} color="#ff4242" strokeWidth={1.75} />
               </button>
@@ -670,7 +671,7 @@ export default function Home() {
 
 
         <button
-          className="btn btn-ghost btn-circle fixed bottom-10 right-8"
+          className="btn btn-ghost btn-circle btnscroll fixed bottom-10 right-8"
           onClick={() => scrollToPred()}
           title="Remonter à la dernière prédction!"
         >

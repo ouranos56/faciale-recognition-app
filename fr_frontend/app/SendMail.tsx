@@ -1,6 +1,5 @@
 import React from "react";
 import fr_api from "./fr_api";
-import { AxiosError } from "axios";
 
 type FormDataProps = {
   formData: {

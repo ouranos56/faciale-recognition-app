@@ -1,10 +1,11 @@
 "use client"
 
-import "./globals.css";
+import "../globals.css";
 import { useEffect, useRef, useState } from "react";
-import SendMail from "./SendMail";
+import SendMail from "../SendMail";
 import toast from "react-hot-toast";
 import { title } from "process";
+import { X } from "lucide-react";
 
 type contactUsProps = {
     setSend: React.Dispatch<React.SetStateAction<{ success?: string, error?: string }>>;
@@ -21,10 +22,13 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
     const [title_out, setTitle_out] = useState(false);
     const i_titleRef = useRef<HTMLDivElement>(null);
 
+    const [mobile_width, setMobile_width] = useState<boolean>(false);
+
     const handSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const loadingToast = toast.loading("Envoi du mail...");
+
 
         const currentFormData = {
             firstname: firstname,
@@ -69,6 +73,21 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
         }
     }, [title_out]);
 
+    useEffect(() => {
+        const checkMobile = () => {
+            const isMobile = window.innerWidth <= 485;
+            setMobile_width(isMobile);
+            console.log(isMobile)
+        };
+
+        checkMobile();
+
+        window.addEventListener('resize', checkMobile);
+
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+
     return (
         <div>
             <a className="link link-hover a" onClick={
@@ -77,7 +96,7 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
             > Contact
             </a >
 
-            <dialog id="my_modal_2 justify-center items-center"
+            <dialog id="my_modal_2"
                 className="modal"
                 ref={modalRef}
             >
@@ -188,7 +207,7 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
                             <div
                                 ref={i_titleRef}
                                 onClick={() => { setTitle_out(true); scaleUp() }}
-                                title="ESC pour fermer la pop up!"                                
+                                title="ESC pour fermer la pop up!"
                                 className="badge badge-outline i_title border-[#dd8800b3] text-[#dd8800b3] w-7 h-7 rounded-3xl cursor-help relative bottom-[-25px] m-4"
                             >i</div>
                         </div>
@@ -196,8 +215,12 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
 
 
                 </div>
-                <form method="dialog" className="modal-backdrop">
-                    <button>close</button>
+                <form method="dialog" className="modal-backdrop modal_md">
+                    <button className="modal_btn  text-center justify-center items-center"
+                    >
+                        close
+                        <X className={`${mobile_width} ? "flex" : "hidden" relative bottom-[75%] left-[1.5px] text-2xl text-red-400`} />
+                    </button>
                 </form>
 
 

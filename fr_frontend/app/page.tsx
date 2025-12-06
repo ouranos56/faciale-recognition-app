@@ -256,7 +256,7 @@ export default function Home() {
                         </div>
 
                         <div className="tour-tag">
-                            <div className="hiking-tag">
+                            <div className="hiking-tag ">
                                 #Face Recognition
                             </div>
                         </div>

@@ -82,7 +82,7 @@ const UpLoadedImageCard = ({ images, handlesetselectedImages, loadingpage }: UpL
                                 id={`checkbox-${i}`}
                                 checked={!!checkedItems[i] || false}
                                 onChange={(e) => handleCheckboxChange(e, i, item.file)}
-                                className=" checkbox checkbox-success absolute top-2 right-2 z-10 bg-white/80 border-2 rounded-md w-5 h-5 hover:border-green-400 transition-colors checked:text-green-500 checked:border-green-500"
+                                className=" checkbox checkbox-success absolute top-3.5 right-1 z-[8] bg-white/80 border-2 rounded-md w-5 h-5 hover:border-green-400 transition-colors checked:text-green-500 checked:border-green-500"
                             />
 
                             {/* <div className="peer-checked:border-green-500 card card-sm p-0.5 border-2 border-transparent rounded-md transition-colors">
@@ -90,8 +90,7 @@ const UpLoadedImageCard = ({ images, handlesetselectedImages, loadingpage }: UpL
                             <CardImage
                                 src={item.url}
                                 alt={`Uploaded Image ${i}`}
-                                heightClass="h-32"
-                                widthClass="h-32"
+                                sizeClass="h-[20vh] w-[23vw]"
                                 priority={i < 4}
                                 loading={i < 4 ? "eager" : "lazy"}
                             />
