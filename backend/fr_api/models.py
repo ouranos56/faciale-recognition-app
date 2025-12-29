@@ -5,6 +5,8 @@ from django.forms import ValidationError
 from django.utils import timezone
 import os, random, string
 from datetime import datetime
+
+from .utils.unique_id import generate_unique_id
 from .fr_facenet import fr_predict
 
 
@@ -12,16 +14,6 @@ def validate_file_size(file):
     max_size = 5 * 1024 * 1024  # 5 Mo en octets
     if file.size > max_size:
         raise ValidationError('La taille du fichier ne doit pas dépasser 5 Mo.')
-
-def generate_unique_id(length=5):
-    """Génère un ID unique de la longueur spécifiée"""
-    # Utiliser des chiffres et des lettres pour plus d'unicité
-    chars = string.digits + string.ascii_lowercase
-    # Ajouter un timestamp court pour garantir l'unicité
-    timestamp = datetime.now().strftime('%M%S')
-    # Génère la partie aléatoire
-    random_part = ''.join(random.choices(chars, k=length))
-    return f"{timestamp}{random_part}"
 
 def get_path_1(instance, filename):
     # Récupère l'extension du fichier original

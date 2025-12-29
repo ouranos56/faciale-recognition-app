@@ -9,7 +9,7 @@ supabase = create_client(
 
 BUCKET = settings.SUPABASE_BUCKET
 
-def upload_image_to_supabase(file, session_uuid: uuid.UUID, index: int):
+def upload_image_to_supabase(file, session_uuid, index: int):
     """
     Upload une image vers Supabase avec un nom déterministe :
     <uuid>_<index>.ext
