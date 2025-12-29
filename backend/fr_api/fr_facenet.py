@@ -2,6 +2,8 @@ import os, joblib, numpy as np, torch
 from PIL import Image
 from facenet_pytorch import MTCNN, InceptionResnetV1
 
+from .utils.image_loader import load_image_from_url
+
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print("\tDevice:", device)
@@ -20,12 +22,17 @@ resnet = InceptionResnetV1(pretrained='vggface2').eval().to(device)
 def get_embedding(img_path):
     try:
         # Vérifier si le fichier existe
-        if not os.path.exists(img_path):
-            print(f"Fichier introuvable : {img_path}")
+        try:
+            # Charger l'image depuis l'URL
+            img = load_image_from_url(img_path)
+
+        except Exception as e:
+            print(f"Erreur lors du chargement de l'image : {e}")
             return None
                 
         # Ouvrir l'image et la convertir en RGB
-        img = Image.open(img_path).convert('RGB')
+        img = load_image_from_url(img_path)
+        # img = Image.open(img_path).convert('RGB')
         # Détecter le visage dans l'image et obtenir un tensor
         face_tensor = mtcnn(img)  # None si si aucun visage detecté
 

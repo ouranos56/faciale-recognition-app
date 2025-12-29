@@ -35,23 +35,6 @@ def get_path_2(instance, filename):
     new_name = f"img_{instance.unique_id}_2{ext}"
     return new_name
 
-def get_prediction(instance):
-    """Modèle pour stocker les résultats de la reconnaissance faciale"""
-    
-    instance = instance.objects.all()
-    instance = instance[:1] #len(instance) 
-
-    # Accès au chemin physique sur le serveur/PC (pour lecture/écriture locale)
-    image1_path = instance[0].path # Ex. '/path/to/project/media/images/monimage1.jpg'
-    image2_path = instance[1].path 
-
-    # Accès à l'URL pour l'affichage web (relatif à MEDIA_URL)
-    # print(instance.image1.url)  # Ex. '/media/images/monimage1.jpg'
-    
-    prediction = fr_predict(image1_path, image2_path, 'C:/Users/HP/Pracrice/fullstack_fr/backend/fr_api/fr_facenet_SVC.joblib')
-
-    return prediction
-
 
 class UploadImageAndPredict(models.Model):
     """Modèle pour stocker les images avec leurs métadonnées"""
@@ -66,7 +49,7 @@ class UploadImageAndPredict(models.Model):
     )
 
     img1 = models.ImageField(
-        upload_to=get_path_1,
+        upload_to="temp/",
         validators=[
             FileExtensionValidator(
                 allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'webp'],
@@ -78,7 +61,7 @@ class UploadImageAndPredict(models.Model):
     )
     
     img2 = models.ImageField(
-        upload_to = get_path_2,
+        upload_to = "temp/",
         validators = [
             FileExtensionValidator(
                 allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'],
@@ -87,6 +70,18 @@ class UploadImageAndPredict(models.Model):
             validate_file_size
         ],
         verbose_name = "Image 2"
+    )
+
+    img1_url = models.URLField(
+        blank=True, 
+        null=True,
+        editable= False
+    )
+    
+    img2_url = models.URLField(
+        blank=True, 
+        null=True,
+        editable= False
     )
     
     selected_model = models.IntegerField(
@@ -120,13 +115,13 @@ class UploadImageAndPredict(models.Model):
     def make_prediction(self):
         """Effectue la prédiction après la création de l'instance"""
         # Accès au chemin physique sur le serveur/PC
-        image1_path = self.img1.path
-        image2_path = self.img2.path
+        image1_url = self.img1_url
+        image2_url = self.img2_url
         model = "SVC" if self.selected_model == 0 else "MLPClassifier"
         
         self.prediction = fr_predict(
-            image1_path, 
-            image2_path, 
+            image1_url, 
+            image2_url, 
             f'C:/Users/HP/Pracrice/fullstack_fr/backend/fr_api/fr_facenet_{model}_1.joblib'
         )
         self.save()

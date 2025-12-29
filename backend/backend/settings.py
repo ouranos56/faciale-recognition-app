@@ -26,8 +26,9 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Configuration des médias
-MEDIA_URL = '/media/'  # L'URL pour accéder aux fichiers média
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Le dossier où seront stockés les fichiers
+
+# MEDIA_URL = '/media/'  # L'URL pour accéder aux fichiers média
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Le dossier où seront stockés les fichiers
 
 
 # Quick-start development settings - unsuitable for production
@@ -97,12 +98,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.config(default=config("DATABASE_URL"))
+    "default": dj_database_url.parse(config("DATABASE_URL", default=None))
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
 }
+
+SUPABASE_URL = config("SUPABASE_URL")
+SUPABASE_KEY = config("SUPABASE_KEY")
+SUPABASE_BUCKET = config("SUPABASE_BUCKET", default="user-images")
 
 
 # Password validation
