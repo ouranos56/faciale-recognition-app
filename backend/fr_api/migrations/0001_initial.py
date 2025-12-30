@@ -18,8 +18,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.UUIDField(editable=False, primary_key=True, serialize=False)),
                 ('unique_id', models.CharField(default=fr_api.models.generate_unique_id, editable=False, max_length=10, verbose_name='Identifiant unique')),
-                ('img1', models.ImageField(upload_to=fr_api.models.get_path_1, validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'webp'], message="Format d'image non supporté. Utilisez JPG, PNG, GIF ou WEBP."), fr_api.models.validate_file_size], verbose_name='Image 1')),
-                ('img2', models.ImageField(upload_to=fr_api.models.get_path_2, validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'webp'], message="Format d'image non supporté. Utilisez JPG, PNG, GIF ou WEBP."), fr_api.models.validate_file_size], verbose_name='Image 2')),
+                ('img1', models.ImageField(upload_to="/temp", validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'webp'], message="Format d'image non supporté. Utilisez JPG, PNG, GIF ou WEBP.")], verbose_name='Image 1')),
+                ('img2', models.ImageField(upload_to="/temp", validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'webp'], message="Format d'image non supporté. Utilisez JPG, PNG, GIF ou WEBP.")], verbose_name='Image 2')),
                 ('prediction', models.CharField(null = True, editable=False, max_length=255, verbose_name='Prédiction')),
                 ('date_upload', models.DateTimeField(auto_now_add=True, verbose_name="Date d'upload")),
             ],

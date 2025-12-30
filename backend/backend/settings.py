@@ -40,7 +40,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost").split(",")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
 
 
 # Application definition
@@ -70,9 +70,10 @@ MIDDLEWARE = [
     # i.e axios ou fetch depuis localhost:3000 vers localhost:8000
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    config("CORS_ALLOWED_ORIGINS", default="http://localhost:3000").split(",")
-]
+CORS_ALLOWED_ORIGINS = config(
+    "CORS_ALLOWED_ORIGINS",
+    default="",
+).split(",")
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -106,6 +107,8 @@ DATABASES = {
 }
 
 SUPABASE_URL = config("SUPABASE_URL")
+if not SUPABASE_URL.endswith("/"):
+    SUPABASE_URL += "/"
 SUPABASE_KEY = config("SUPABASE_KEY")
 SUPABASE_BUCKET = config("SUPABASE_BUCKET", default="user-images")
 

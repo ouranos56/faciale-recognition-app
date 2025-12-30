@@ -35,7 +35,7 @@ Content-Type: application/json
 
 ###
 
-PATCH    http://127.0.0.1:8000/api/predictions/516739de-26c9-4168-a21e-ba234672e759/
+PATCH    http://127.0.0.1:8000/api/predictions/30c6dfd3-025c-4e00-b57d-5d6a38899ee5/
 Content-Type: application/json
 
 {

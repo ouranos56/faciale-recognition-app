@@ -46,12 +46,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='uploadimageandpredict',
             name='img1',
-            field=models.ImageField(upload_to='temp/', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'webp'], message="Format d'image non supporté. Utilisez JPG, PNG, GIF ou WEBP."), fr_api.models.validate_file_size], verbose_name='Image 1'),
+            field=models.ImageField(upload_to='temp/', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'webp'], message="Format d'image non supporté. Utilisez JPG, PNG, GIF ou WEBP.")]),
         ),
         migrations.AlterField(
             model_name='uploadimageandpredict',
             name='img2',
-            field=models.ImageField(upload_to='temp/', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'webp'], message="Format d'image non supporté. Utilisez JPG, PNG, GIF ou WEBP."), fr_api.models.validate_file_size], verbose_name='Image 2'),
+            field=models.ImageField(upload_to='temp/', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'webp'], message="Format d'image non supporté. Utilisez JPG, PNG, GIF ou WEBP.")]),
         ),
         migrations.AlterField(
             model_name='uploadimageandpredict',

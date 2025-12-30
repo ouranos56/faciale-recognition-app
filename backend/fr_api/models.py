@@ -1,32 +1,9 @@
 import uuid
 from django.db import models
-from django.core.validators import FileExtensionValidator
-from django.forms import ValidationError
-from django.utils import timezone
 import os, random, string
 from datetime import datetime
-
 from .utils.unique_id import generate_unique_id
 from .fr_facenet import fr_predict
-
-
-def validate_file_size(file):
-    max_size = 5 * 1024 * 1024  # 5 Mo en octets
-    if file.size > max_size:
-        raise ValidationError('La taille du fichier ne doit pas dépasser 5 Mo.')
-
-def get_path_1(instance, filename):
-    # Récupère l'extension du fichier original
-    ext = os.path.splitext(filename)[1].lower()
-    new_name = f"img_{instance.unique_id}_1{ext}"
-    return new_name
-
-def get_path_2(instance, filename):
-    # Récupère l'extension du fichier original
-    ext = os.path.splitext(filename)[1].lower()
-    new_name = f"img_{instance.unique_id}_2{ext}"
-    return new_name
-
 
 class UploadImageAndPredict(models.Model):
     """Modèle pour stocker les images avec leurs métadonnées"""
@@ -38,30 +15,6 @@ class UploadImageAndPredict(models.Model):
         default=generate_unique_id,
         editable=False,
         verbose_name="Identifiant unique"
-    )
-
-    img1 = models.ImageField(
-        upload_to="temp/",
-        validators=[
-            FileExtensionValidator(
-                allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'webp'],
-                message="Format d'image non supporté. Utilisez JPG, PNG, GIF ou WEBP."
-            ),
-            validate_file_size
-        ],
-        verbose_name="Image 1"
-    )
-    
-    img2 = models.ImageField(
-        upload_to = "temp/",
-        validators = [
-            FileExtensionValidator(
-                allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-                message = "Format d'image non supporté. Utilisez JPG, PNG, GIF ou WEBP."
-            ),
-            validate_file_size
-        ],
-        verbose_name = "Image 2"
     )
 
     img1_url = models.URLField(

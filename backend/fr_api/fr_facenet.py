@@ -1,5 +1,7 @@
 import os, joblib, numpy as np, torch
+import requests
 from PIL import Image
+from io import BytesIO
 from facenet_pytorch import MTCNN, InceptionResnetV1
 
 from .utils.image_loader import load_image_from_url
@@ -24,15 +26,17 @@ def get_embedding(img_path):
         # Vérifier si le fichier existe
         try:
             # Charger l'image depuis l'URL
-            img = load_image_from_url(img_path)
-
+            # img = load_image_from_url(img_path)
+            img = Image.open(BytesIO(requests.get(img_path).content)).convert("RGB")
+            print(f"get_embedding: successfully loaded image from {img_path}")
         except Exception as e:
             print(f"Erreur lors du chargement de l'image : {e}")
             return None
                 
         # Ouvrir l'image et la convertir en RGB
-        img = load_image_from_url(img_path)
+        # img = load_image_from_url(img_path)
         # img = Image.open(img_path).convert('RGB')
+
         # Détecter le visage dans l'image et obtenir un tensor
         face_tensor = mtcnn(img)  # None si si aucun visage detecté
 
