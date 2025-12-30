@@ -71,7 +71,7 @@ class UploadImageAndPredictSerializer(serializers.ModelSerializer):
         )
 
         # Lancer la prédiction
-        # instance.make_prediction()
+        instance.make_prediction()
         instance.save()
 
         return instance
