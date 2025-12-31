@@ -38,6 +38,59 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
     }
   }
 
+
+  
+// For files: createObjectURL and revoke on cleanup
+  const [img1Url, setImg1Url] = useState<string | null>(() =>
+    typeof fr.img1 === "string" ? fr.img1 : fr.img1 ? URL.createObjectURL(fr.img1) : null
+  );
+  const [img2Url, setImg2Url] = useState<string | null>(() =>
+    typeof fr.img2 === "string" ? fr.img2 : fr.img2 ? URL.createObjectURL(fr.img2) : null
+  );
+
+  useEffect(() => {
+    // update when fr changes; ensure we revoke old object URLs
+    let prev1: string | null = null;
+
+    if (fr.img1 instanceof File) {
+      prev1 = img1Url; // old
+      const u = URL.createObjectURL(fr.img1);
+      setImg1Url(u);
+      return () => {
+        URL.revokeObjectURL(u);
+        if (prev1 && prev1.startsWith("blob:")) URL.revokeObjectURL(prev1);
+      };
+    } else {
+      // string or null
+      if (img1Url && img1Url.startsWith("blob:")) {
+        URL.revokeObjectURL(img1Url);
+      }
+      setImg1Url(typeof fr.img1 === "string" ? fr.img1 : null);
+    }
+    // same for img2 (separate effect would be cleaner)
+  }, [fr.img1]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    let prev2: string | null = null;
+
+    if (fr.img2 instanceof File) {
+      prev2 = img1Url; // old
+      const u = URL.createObjectURL(fr.img2);
+      setImg1Url(u);
+      return () => {
+        URL.revokeObjectURL(u);
+        if (prev2 && prev2.startsWith("blob:")) URL.revokeObjectURL(prev2);
+      };
+    } else {
+      // string or null
+      if (img2Url && img2Url.startsWith("blob:")) {
+        URL.revokeObjectURL(img2Url);
+      }
+      setImg1Url(typeof fr.img2 === "string" ? fr.img2 : null);
+    }
+  }, [fr.img2]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  
   return (
     <div key={fr.id} id={fr.id} className={`card bg-base-100 shadow-xl/20 mb-12 scroll-auto md:scroll-auto `} >
 
@@ -46,18 +99,12 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
           <div className='flex flex-row justify-center items-center cardImagecontainer my-0.5'>
             
             <CardImage
-              src={fr.img1 instanceof File
-                ? URL.createObjectURL(fr.img1)
-                : fr.img1
-              }
+              src={img1Url ?? undefined}
               alt="Peaple picture"
               sizeClass="h-[35vh] w-[20vw] cardImagesize"
             />
             <CardImage
-              src={fr.img2 instanceof File
-                ? URL.createObjectURL(fr.img2)
-                : fr.img2
-              }
+              src={img2Url ?? undefined}
               alt="Peaple picture"
               sizeClass="h-[35vh] w-[20vw] cardImagesize"
             />
