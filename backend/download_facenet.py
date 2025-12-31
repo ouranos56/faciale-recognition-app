@@ -1,6 +1,6 @@
 from facenet_pytorch import InceptionResnetV1
 import sys
-importos
+import os
 from pathlib import Path
  
 # print("📥 Téléchargement de FaceNet...")
