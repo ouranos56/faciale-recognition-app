@@ -4,6 +4,7 @@ import os, random, string
 from datetime import datetime
 from .utils.unique_id import generate_unique_id
 from .fr_facenet import fr_predict
+from pathlib import Path
 
 class UploadImageAndPredict(models.Model):
     """Modèle pour stocker les images avec leurs métadonnées"""
@@ -64,10 +65,14 @@ class UploadImageAndPredict(models.Model):
         image2_url = self.img2_url
         model = "SVC" if self.selected_model == 0 else "MLPClassifier"
         
+        # self.prediction = fr_predict(image1_url,image2_url, f'fr_api/fr_facenet_{model}_1.joblib')
+        
+        BASE_DIR = Path(__file__).resolve().parent
+        MODEL_PATH = BASE_DIR/f"fr_facenet_{model}_1.joblib"
         self.prediction = fr_predict(
-            image1_url, 
-            image2_url, 
-            f'C:/Users/HP/Pracrice/fullstack_fr/backend/fr_api/fr_facenet_{model}_1.joblib'
+            image1_url,
+            image2_url,
+            str(MODEL_PATH)
         )
         self.save()
 
