@@ -19,7 +19,19 @@ mtcnn = MTCNN(
     device=device
 )
 
-resnet = InceptionResnetV1(pretrained='vggface2').eval().to(device)
+# resnet = InceptionResnetV1(pretrained='vggface2').eval().to(device)
+
+base_dir = os.path.dirname(__file__)
+facenet_path = os.path.join( 
+    base_dir, 
+    "ml_models",
+    "20180402-114759-vggface2.pt"
+)
+resnet = InceptionResnetV1(pretrained=False).to(device) 
+resnet.load_state_dict(
+    torch.load(facenet_path, map_location=device) 
+)
+resnet.eval()
 
 def get_embedding(img_path):
     try:
