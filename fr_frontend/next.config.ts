@@ -15,10 +15,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       // Permettre le chargement des images depuis localhost:8000
         {
-          protocol: 'http',
-          hostname: 'localhost',
-          port: '8000',
-          pathname: '/media/**',
+          protocol: 'https',
+          hostname: '**.supabase.co',
+          pathname: '/**'
         },
       ],
   },
