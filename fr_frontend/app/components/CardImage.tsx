@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 
 interface CardImageProps {
-  src: string;
+  src?: string | undefined;
   alt: string;
   sizeClass?: string;
   priority?: boolean;
@@ -10,11 +10,15 @@ interface CardImageProps {
 }
 
 const CardImage: React.FC<CardImageProps> = ({ src, alt, sizeClass,  priority, loading }) => {
+
+  const [hasError, setHasError] = useState(false)
+  const finalSrc = !src || hasError ? "/assets/fallback.png" : src
+  
   return (
     <div className='avatar '>
       <div className={` mask  mask-squircle ${sizeClass} overscroll-contain bg-center bg-cover`}>
         <Image
-          src={src}
+          src={finalSrc}
           alt={alt}
           quality={100}
           className='object-cover'
@@ -22,6 +26,7 @@ const CardImage: React.FC<CardImageProps> = ({ src, alt, sizeClass,  priority, l
           width={500}
           priority={priority}
           loading={loading}
+          onError={() => setHasError(true)}
         />
       </div>
     </div>
