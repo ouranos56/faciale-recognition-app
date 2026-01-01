@@ -20,8 +20,8 @@ import CapturePictures from "../components/CapturePictures";
 // export
 type FRApiresponse = {
   id: string;
-  img1: string;
-  img2: string;
+  img1_url: string;
+  img2_url: string;
   selected_model: number;
   prediction: string;
   rigthprediction: string;
