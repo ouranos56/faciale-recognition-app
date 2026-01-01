@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef} from 'react';
 import CardImage from './CardImage';
 
 
@@ -6,8 +6,8 @@ type PredictCardProps = {
   fr: {
     id: string;
     prediction: string;
-    img1: string | File;
-    img2: string | File;
+    img1_url: string ;
+    img2_url: string ;
   };
   index: number;
   predValue?: boolean;
@@ -16,7 +16,7 @@ type PredictCardProps = {
 }
 
 
-export default function PredictCard({ fr, index, predValue, handleSendCorrection /*, smoothBehavior*/}: PredictCardProps) {
+export default function PredictCard({ fr, index, predValue, handleSendCorrection /*, smoothBehavior*/ }: PredictCardProps) {
   const [selectedValue, setSelectedValue] = useState(1);
   const correctionDivRef1 = useRef<HTMLDivElement>(null);
   const throughTextDivRef = useRef<HTMLDivElement>(null);
@@ -38,82 +38,35 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
     }
   }
 
-
-  
-// For files: createObjectURL and revoke on cleanup
-  const [img1Url, setImg1Url] = useState<string | null>(() =>
-    typeof fr.img1 === "string" ? fr.img1 : fr.img1 ? URL.createObjectURL(fr.img1) : null
-  );
-  const [img2Url, setImg2Url] = useState<string | null>(() =>
-    typeof fr.img2 === "string" ? fr.img2 : fr.img2 ? URL.createObjectURL(fr.img2) : null
-  );
-
-  useEffect(() => {
-    // update when fr changes; ensure we revoke old object URLs
-    let prev1: string | null = null;
-
-    if (fr.img1 instanceof File) {
-      prev1 = img1Url; // old
-      const u = URL.createObjectURL(fr.img1);
-      setImg1Url(u);
-      return () => {
-        URL.revokeObjectURL(u);
-        if (prev1 && prev1.startsWith("blob:")) URL.revokeObjectURL(prev1);
-      };
-    } else {
-      // string or null
-      if (img1Url && img1Url.startsWith("blob:")) {
-        URL.revokeObjectURL(img1Url);
-      }
-      setImg1Url(typeof fr.img1 === "string" ? fr.img1 : null);
-    }
-    // same for img2 (separate effect would be cleaner)
-  }, [fr.img1]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    let prev2: string | null = null;
-
-    if (fr.img2 instanceof File) {
-      prev2 = img1Url; // old
-      const u = URL.createObjectURL(fr.img2);
-      setImg1Url(u);
-      return () => {
-        URL.revokeObjectURL(u);
-        if (prev2 && prev2.startsWith("blob:")) URL.revokeObjectURL(prev2);
-      };
-    } else {
-      // string or null
-      if (img2Url && img2Url.startsWith("blob:")) {
-        URL.revokeObjectURL(img2Url);
-      }
-      setImg1Url(typeof fr.img2 === "string" ? fr.img2 : null);
-    }
-  }, [fr.img2]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  
   return (
     <div key={fr.id} id={fr.id} className={`card bg-base-100 shadow-xl/20 mb-12 scroll-auto md:scroll-auto `} >
 
       <figure>
         {
           <div className='flex flex-row justify-center items-center cardImagecontainer my-0.5'>
-            
+
             <CardImage
-              src={img1Url ?? undefined}
-              alt="Peaple picture"
+              src={fr.img1_url ?? ""}
+              //  src={fr.img1 instanceof File
+              //   ? URL.createObjectURL(fr.img1)
+              //   : fr.img1
+              // } 
+              alt="People picture"
               sizeClass="h-[35vh] w-[20vw] cardImagesize"
+              priority={true} //ce qui signifie que l'image doit être chargée dès que possible
             />
             <CardImage
-              src={img2Url ?? undefined}
-              alt="Peaple picture"
+              src={fr.img2_url ?? ""}
+              alt="People picture"
               sizeClass="h-[35vh] w-[20vw] cardImagesize"
+              priority={true} //ce qui signifie que l'image doit être chargée dès que possible
             />
           </div>
 
         }
       </figure>
 
-      <table className="table mb-1.5 border-base-content/12 bg-base-200 w-[100%]">
+      <table className="table mb-1.5 border-base-content/12 bg-base-200 w-full">
         <thead className="bg-accent/6 font-bold text-base">
           <tr>
             <th className="rounded-tl-lg p-1"></th>
@@ -125,18 +78,18 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
         <tbody className="text-base font-mono">
           <tr>
             <th className='p-1' >{index}</th>
-            <td className='p-2 border-r-1 border-amber-700'>
+            <td className='p-2 border-r-2 border-amber-700'>
               <div className="flex flex-row justify-center text-center gap-2 text-amber-700 dark:text-amber-600">
                 <div ref={throughTextDivRef}>
-                  {!fr.prediction 
-                      ? 'En attente...'
-                      : fr.prediction.length >= 10
-                        // ? fr.prediction
-                        ? `Visage non détecté dans ${fr.prediction.split(' ')[9] +" " + fr.prediction.split(' ')[10]}`
-                        : (fr.prediction.split('_').map(Number)[0] === 0
-                            ? 'Visages différents'
-                            : 'Visages identiques'
-                          )
+                  {!fr.prediction
+                    ? 'En attente...'
+                    : fr.prediction.length >= 10
+                      // ? fr.prediction
+                      ? `Visage non détecté dans ${fr.prediction.split(' ')[9] + " " + fr.prediction.split(' ')[10]}`
+                      : (fr.prediction.split('_').map(Number)[0] === 0
+                        ? 'Visages différents'
+                        : 'Visages identiques'
+                      )
                   }
                 </div>
                 <div ref={correctionDivRef1} className='text-green-400 font-medium text-base'></div>
