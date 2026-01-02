@@ -4,7 +4,7 @@ import "../globals.css";
 import { useEffect, useRef, useState } from "react";
 import HellohHand from "../assets/wired-outline-2716-logo-clubhouse-hover-pinch.gif";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { Mail, X } from "lucide-react";
 
 export default function AboutUs() {
 
@@ -58,7 +58,7 @@ export default function AboutUs() {
                 ref={modalRef}
             >
                 <div className="modal-box">
-                    <div className="flex flex-row justify-center items-center text-[#bb4d00] font-bold text-lg">
+                    <div className=" mt-[-3%] flex flex-row justify-center items-center text-[#bb4d00] font-bold text-lg">
                         Hello!
                         <Image
                             src={HellohHand}
@@ -97,24 +97,25 @@ export default function AboutUs() {
                                     }}
                             >by Ouranos W .</span>
                         </div>
+                        
                     </div>
-
+                    <div className="text-[#bb4d00] text-lg flex flex-row text-center justify-center items-center"><Mail size={30} strokeWidth={1} />&nbsp;frinnovagen56bj@gmail.com</div>
                     <div
                         title="ESC pour fermer la pop up!"
                         ref={i_titleRef}
                         onClick={() => { setTitle_out(true); scaleUp() }}
-                        className="badge badge-outline border-[#dd8800b3] text-[#dd8800b3] w-7 h-7 rounded-3xl cursor-help relative bottom-[-30px] right-[-50%] m-4"
+                        className=" mt-[-8%] badge badge-outline border-[#dd8800b3] text-[#dd8800b3] w-7 h-7 rounded-3xl cursor-help relative bottom-[-30px] right-[-50%] m-4"
                     >
                         i
                     </div>
                 </div>
 
 
-                <form method="dialog" className="modal-backdrop modal_md">
-                    <button className="modal_btn  text-center justify-center items-center"
+                <form method="dialog" className="modal-backdrop modalmd">
+                    <button className="modalbtn  text-center justify-center items-center"
                     >
                         close
-                        <X className={`${mobile_width} ? "flex" : "hidden" relative bottom-[75%] left-[1.5px] text-2xl text-red-400`} />
+                        {/* <X className={`${mobile_width} ? "flex" : "hidden" relative bottom-[75%] left-[1.5px] text-2xl text-red-400`} /> */}
                     </button>
                 </form>
             </dialog>

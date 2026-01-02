@@ -6,6 +6,7 @@ import SendMail from "../SendMail";
 import toast from "react-hot-toast";
 import { title } from "process";
 import { X } from "lucide-react";
+import sendMailWithResend from "./sendMailWithResend";
 
 type contactUsProps = {
     setSend: React.Dispatch<React.SetStateAction<{ success?: string, error?: string }>>;
@@ -38,9 +39,7 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
             consented: consented,
         };
 
-        console.log("formData avant envoi:", currentFormData);
-
-        await SendMail({ formData: currentFormData, setSend: setSend });
+        await sendMailWithResend({ formData: currentFormData, setSend: setSend });
 
         toast.dismiss(loadingToast);
 
@@ -100,7 +99,7 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
                 className="modal"
                 ref={modalRef}
             >
-                <div className="modal-box justify-center items-center">
+                <div className="modal-box justify-center items-center my-[5vh] ">
 
                     <form
                         method="get"
@@ -115,7 +114,7 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
                                     type="text"
                                     className="input validator input-md w-[100%]"
                                     required
-                                    placeholder="First name"
+                                    placeholder="Klaus"
                                     pattern="[A-Za-z][A-Za-z0-9\-]*"
                                     minLength={3}
                                     maxLength={30}
@@ -128,7 +127,7 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
                                         // handleChange(e)
                                     }
                                 />
-                                <p className="validator-hint">Must be 3 to 30 characters containing only letters, numbers or dash</p>
+                                <p className="validator-hint mt-[-1%] ">Entrer 3-30 caractères (lettres, nombres or tiret)</p>
 
                             </label>
                         </div>
@@ -138,7 +137,7 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
                                 <span>Your Name</span>
                                 <input
                                     type="text"
-                                    placeholder="marc"
+                                    placeholder="MIKAELSON"
                                     className="input input-md w-[100%]"
                                     value={lastname
                                         // formData.name
@@ -167,7 +166,7 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
                                         // handleChange(e)
                                     }
                                 />
-                                <div className="validator-hint">Enter valid email address</div>
+                                <div className="validator-hint mt-[-1%]">Entrez une adresse e-mail valide</div>
                             </label>
                         </div>
 
@@ -197,11 +196,11 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
                             // onChange={(e) => handleChange(e)}
                             />
                             <span>
-                                <label >I consent to being contacted by the team</label>
+                                <label >Je consent à être contacté par l&apos;équipe</label>
                             </span>
                         </div>
 
-                        <div className="flex flex-row  items-center">
+                        <div className="flex flex-row  items-center mt-[-1%]">
                             <button type="submit" className="btn btn-outline relative left-[40%] btn-success border-[#11c67f] hover:bg-[#11c67f] mt-5">Submit</button>
 
                             <div
@@ -215,11 +214,11 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
 
 
                 </div>
-                <form method="dialog" className="modal-backdrop modal_md">
-                    <button className="modal_btn  text-center justify-center items-center"
+                <form method="dialog" className="modal-backdrop modalmd">
+                    <button className="modalbtn text-center justify-center items-center"
                     >
                         close
-                        <X className={`${mobile_width} ? "flex" : "hidden" relative bottom-[75%] left-[1.5px] text-2xl text-red-400`} />
+                        {/* <X className={`${mobile_width} ? "flex" : "hidden" relative bottom-[75%] left-[1.5px] text-2xl text-red-400`} /> */}
                     </button>
                 </form>
 
