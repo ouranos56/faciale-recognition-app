@@ -788,6 +788,10 @@ button {
   color: transparent;
 }
 
+.introduce_gif{
+  border-radius: 19% 19% 19% 19% / 19% 19% 19% 19% ;
+  /* border-radius: 39% 39% 39% 39% / 20% 20% 20% 20% ; */
+}
 .introduce_vid{
   border-radius: 150px;
   border-radius: 19% 19% 19% 19% / 19% 19% 19% 19% ;
@@ -1143,7 +1147,7 @@ button {
   .md_predex1 {
     display: flex;
     width: 86vw;
-    height: 95vh;
+    height: 75vh;
   }
   .md_commencer_container {
     width: 90%;
@@ -1285,6 +1289,20 @@ button {
     width: 40vw;
     height: 35vh;
   } 
+   
+}
+@media screen and (max-width: 700px) and (min-width:385px){
+  .introduce_gif{
+    height: 75vh;
+    width: 90vw;
+  }
+   
+}
+@media screen and (max-width: 385px){
+  .introduce_gif{
+    height: 60vh;
+    width: 90vw;
+  }
    
 }
 @media screen and (max-width:769px) and (min-width:485px){
