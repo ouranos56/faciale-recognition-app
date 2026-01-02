@@ -9,7 +9,7 @@ import PredictCard from "../components/PredictCard";
 import UpLoadedImageCard from "../components/UpLoadedImageCard";
 import { useCtrlI } from "../hookq/useCtrlI";
 import { useEnter } from "../hookq/useEnter";
-import { BrushCleaning, Camera, ClockArrowUp, Facebook, GitCompareArrows, Linkedin } from "lucide-react";
+import { BrushCleaning, Camera, ClockArrowUp, Eraser, Facebook, GitCompareArrows, Linkedin } from "lucide-react";
 import Image from "next/image";
 import PictureGif from "../assets/picture.gif";
 import Compare2PersonsGif from "../assets/social-distance.gif";
@@ -93,11 +93,17 @@ export default function Home() {
         ? (crypto).randomUUID()
         : uuidv4();
       localStorage.setItem('client_session_id', sid as string);
-      toast.success("Bienvenu !")
-      setNewU(false);
-    }
+      setNewU(true);
+    } else { setNewU(false) }
 
     setSid(sid);
+
+    const sid_erase = localStorage.getItem('sid_erase');
+    if (sid_erase == "false") {
+      toast.success("Bienvenu !")
+      localStorage.setItem('sid_erase', "true");
+    }
+
     return sid;
   };
 
@@ -163,7 +169,7 @@ export default function Home() {
 
       setFrpredictions(res.data ?? []);
 
-      if (!newU) {
+      if (!newU && res.data.length > 0) {
         toast.success("Prédictions récupérées avec succès !");
       }
 
@@ -489,6 +495,53 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  // const erasepredictions = localStorage.getItem("erasepredictions");
+  // useEffect(() => {    
+  //   if (erasepredictions === "true") {
+  //     const sid = (typeof crypto !== "undefined" && "randomUUID" in crypto)
+  //       ? (crypto).randomUUID()
+  //       : uuidv4();
+  //     localStorage.setItem('client_session_id', sid as string);
+  //     setFrpredictions([]);
+  //     setSid(sid);
+  //     localStorage.setItem("erasepredictions", "false")
+  //     toast.success("Toutes les prédictions ont été effacées !");
+  //   }
+  // }, [erasepredictions]);
+
+
+  const clearAllPredictions = () => {
+    const newSid = (typeof crypto !== "undefined" && "randomUUID" in crypto)
+      ? (crypto).randomUUID()
+      : uuidv4();
+
+    localStorage.setItem('client_session_id', newSid);
+    localStorage.setItem("erasepredictions", "false");
+
+    setFrpredictions([]);
+    setSid(newSid);
+    toast.success("Toutes les prédictions ont été effacées !");
+  };
+
+  // Listener localStorage pour détecter les changements depuis Header
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const eraseflag = localStorage.getItem("erasepredictions");
+      if (eraseflag === "true") {
+        clearAllPredictions();
+      }
+    };
+
+    // Écouter les changements localStorage
+    window.addEventListener('storage', handleStorageChange);
+
+    // Vérifier au montage
+    handleStorageChange();
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
 
   return (
@@ -577,7 +630,7 @@ export default function Home() {
                     />
                   )}
                 </div>
-              
+
               : (<div className="border-dashed border-accent/15 border-bb4e0041 border-4 rounded-2xl overflow-auto md:overflow-scroll uploadedimagecard max-h-[55vh] md_uploads_c w-[85%] ">
                 {
                   uploading
@@ -612,7 +665,10 @@ export default function Home() {
 
             <div className="flex flex-row justify-center w-full items-center gap-4">
               <button className="btn btn-soft h-9 p-3 bg-transparent hover:bg-green-200 hover:scale-105 transition-all border-2 border-green-500 hover:border-green-00 text-green-600 hover:text-green-800 btn-success btn-sm"
-                onClick={() => { handlePostImageToPredict(); }}
+                onClick={() => {
+                  handlePostImageToPredict();
+                  if (newU) setNewU(false);
+                }}
                 title="Ctrl + Enter"
                 ref={clickSendPredictFilesRef}
               >Comparer
