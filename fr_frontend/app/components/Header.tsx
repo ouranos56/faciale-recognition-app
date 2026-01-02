@@ -1,21 +1,32 @@
 "use client";
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import "../globals.css";
 import useScrollDirection from "../hookq/useScrollDirection";
+import { useEffect, useState } from "react";
+import { Eraser } from "lucide-react";
 
 export default function Header() {
     const scrollDirection = useScrollDirection();
-    const [scrolldown, setScrollDown] = useState<string>("");
+    // const [scrolldown, setScrollDown] = useState<string>("");
+
+    // useEffect(() => {
+    //     if (scrollDirection === "down") {
+    //         setScrollDown("down")
+    //     } else {
+    //         setScrollDown("up")
+    //     }
+    // }, [scrollDirection]);
+    const scrolldown = scrollDirection === "down" ? "down" : "up";
+    const [erasepredictions, setErasepredictions] = useState<boolean>(false);
 
     useEffect(() => {
-        if (scrollDirection === "down") {
-            setScrollDown("down")
-        } else {
-            setScrollDown("up")
-        }
-    }, [scrollDirection]);
-
+        if (erasepredictions) {
+            localStorage.setItem("erasepredictions", erasepredictions.toString()); 
+            localStorage.setItem('sid_erase', "false");
+            window.location.reload();
+        }       
+    }, [erasepredictions]);
 
     return (
         <div>
@@ -34,7 +45,17 @@ export default function Header() {
                     >EDIYA</a>
                 </div>
 
-                <div className="navbar-end"></div>
+                <div className="navbar-end">
+                    <div className="flex flex-row justify-center items-center gap-1.5 border-b-2 rounded-b-box px-3 py-1">
+                        Effacer toutes vos prédictions&nbsp;
+                        <button
+                            className="btn btn-sm p-2 bg-transparent hover:bg-red-200 hover:scale-105 transition-all"
+                            onClick={() => setErasepredictions(true)}
+                        >
+                            <Eraser size={17} color="#ff4242" strokeWidth={1.75} />
+                        </button>
+                    </div>
+                </div>
             </div >
 
 
@@ -53,7 +74,17 @@ export default function Header() {
                     >EDIYA</a>
                 </div>
 
-                <div className="navbar-end"></div>
+                <div className="navbar-end">
+                    <div className="flex flex-row justify-center items-center gap-1.5 border-b-2 rounded-b-box px-3 py-1">
+                        Effacer toutes vos prédictions&nbsp;
+                        <button
+                            className="btn btn-sm p-2 bg-transparent hover:bg-red-200 hover:scale-105 transition-all"
+                            onClick={() => setErasepredictions(true)}
+                        >
+                            <Eraser size={17} color="#ff4242" strokeWidth={1.75} />
+                        </button>
+                    </div>
+                </div>
             </div >
         </div>
     )
