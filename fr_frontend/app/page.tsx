@@ -11,6 +11,7 @@ import GetStartedImage from "./assets/get-started-1.png"
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import LoopingVideo from "./components/LoopingVideo"
+import vid1Gif from "./assets/vid1.gif";
 import toast from "react-hot-toast";
 import "./globals.css";
 
@@ -141,9 +142,18 @@ export default function Home() {
 
                 <div className="top-[100vh] card_up h-fit">
                     <div className=" justify-center items-center h-fit px-2">
-                        <LoopingVideo
+                        {/* <LoopingVideo
                             src="\assets\vid1.mp4"
                             className="object-cover introduce_vid w-[100vw] md:w-[125vw]"
+                        /> */}
+                        <Image
+                            src={vid1Gif}
+                            unoptimized
+                            alt="Gif showing face recognition of a man"
+                            // width={250}
+                            // height={250}
+                            priority={true}
+                            className="introduce_gif w-[85vw] h-[120vh] "
                         />
                     </div>
 
@@ -262,7 +272,7 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="card bg-base-200 shadow-xl md_commencer_text md:w-[40%] h-[65vh] p-3 text-[#3f280f] text-justify md:text-xl uploadedimagecard">
+                    <div className="card bg-base-200 shadow-xl md_commencer_text md:w-[40%] h[65vh] p-3 text-[#3f280f] text-justify md:text-xl uploadedimagecard">
                         Ici, l’IA n’est pas un concept compliqué : c’est une expérience.<br />
 
                         <br />Notre outil combine l’intelligence artificielle avec une simplicité presque humaine.
