@@ -103,7 +103,7 @@ def fr_predict(imga_path, imgb_path, model_path):
         proba = None
         print(f"\nPrédiction: {pred[0]}, Probabilité/Taux de concordance : {proba}")
 
-    
+    print(f"Pred: {pred}")
     print("\n\t\t✅Identiques✅\n\n" if pred[0] == 1 else "\n\t\t❌❌Différents❌❌\n\n")
 
     return f"{int(pred[0])}_{float(round(proba, 4))}"
