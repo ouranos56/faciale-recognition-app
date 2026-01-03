@@ -152,7 +152,7 @@ export default function Home() {
                             alt="Gif showing face recognition of a man"
                             // width={250}
                             // height={250}
-                            priority={true}
+                            priority
                             className="introduce_gif w-[85vw] h-[120vh] "
                         />
                     </div>
