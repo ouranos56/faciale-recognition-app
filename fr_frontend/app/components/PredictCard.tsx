@@ -83,7 +83,7 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
                 <div ref={throughTextDivRef}>
                   {!fr.prediction
                     ? 'En attente...'
-                    : fr.prediction.length >= 10 && fr.prediction.split('_').map(Number)[1].toString().slice(0, 6) === "NaN" && fr.prediction.split('_').map(Number)[1].toString().slice(0, 6) === ""
+                    : fr.prediction.length > 20 || isNaN(fr.prediction.split('_').map(Number)[0])
                       // ? fr.prediction
                       ? `Visage non détecté dans ${fr.prediction.split(' ')[9] + " " + fr.prediction.split(' ')[10]}`
                       : (fr.prediction.split('_').map(Number)[0] === 0
@@ -96,7 +96,7 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
               </div>
             </td>
             <td className="justify-center items-center pl-[13%] pr-0">
-              {fr.prediction && fr.prediction.split('_').map(Number)[1]
+              {fr.prediction && !isNaN(fr.prediction.split('_').map(Number)[1])
                 ? `${(fr.prediction.split('_').map(Number)[1] * 100).toFixed(2)} %`
                 // : "Indisponible."
                 : "--"
@@ -129,7 +129,7 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
                   className="radio radio-success bg-green-200 border-green-300 checked:bg-green-200 checked:text-green-600 checked:border-green-600 hover:border-green-600"
                   value={1}
                   title='Ces visages sont identiques '
-                  disabled={predValue ? true : false}
+                  disabled={predValue && !isNaN(fr.prediction.split('_').map(Number)[0]) ? true : false}
                   onChange={(e) => {
                     setSelectedValue(Number(e.target.value));
                     setDisabled(false);
@@ -142,7 +142,7 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
                   className="radio radio-error bg-red-100 border-red-300 checked:bg-red-200 checked:text-red-600 checked:border-red-600 hover:border-red-600"
                   value={0}
                   title='Ces visages sont différents'
-                  disabled={!predValue ? true : false}
+                  disabled={!predValue && !isNaN(fr.prediction.split('_').map(Number)[0]) ? true : false}
                   onChange={(e) => {
                     setSelectedValue(Number(e.target.value));
                     setDisabled(false);
