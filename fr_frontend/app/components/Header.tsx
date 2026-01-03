@@ -8,16 +8,16 @@ import { Eraser } from "lucide-react";
 
 export default function Header() {
     const scrollDirection = useScrollDirection();
-    // const [scrolldown, setScrollDown] = useState<string>("");
+    const [scrolldown, setScrollDown] = useState<string>("");
 
-    // useEffect(() => {
-    //     if (scrollDirection === "down") {
-    //         setScrollDown("down")
-    //     } else {
-    //         setScrollDown("up")
-    //     }
-    // }, [scrollDirection]);
-    const scrolldown = scrollDirection === "down" ? "down" : "up";
+    useEffect(() => {
+        if (scrollDirection === "down") {
+            setScrollDown("down")
+        } else {
+            setScrollDown("up")
+        }
+    }, [scrollDirection]);
+    // const scrolldown = scrollDirection === "down" ? "down" : "up";
     const [erasepredictions, setErasepredictions] = useState<boolean>(false);
 
     useEffect(() => {
