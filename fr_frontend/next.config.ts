@@ -1,15 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // webpack(config) {
-  //   config.module.rules.push({
-  //     test: /\.svg$/i,
-  //     type: "asset/resource", // fait que l'import devient une URL
-  //   });
-  //   return config;
-  // },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      type: "asset/resource", // fait que l'import devient une URL
+    });
+    return config;
+  },
   images: {
-    qualities: [25, 50, 75 , 90],
     dangerouslyAllowSVG: true, // autorise les SVG
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     
@@ -19,13 +18,7 @@ const nextConfig: NextConfig = {
           protocol: 'https',
           hostname: '**.supabase.co',
           pathname: '/**'
-        },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '8000',
-        pathname: '/**'
-      }
+        }
       ],
   },
   
