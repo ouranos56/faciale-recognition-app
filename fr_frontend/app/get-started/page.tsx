@@ -606,7 +606,7 @@ export default function Home() {
           }
         </div>
 
-        <div className={`card md_uploads bg-base-200/65 shadow-xl/20 mb-5 p-3 flex flex-col justify-between items-center gap-3 md:w-3/6 ${frpredictions.length === 0 || upLoadedImages.length === 0 ? "max-h-min" : "h-[85vh] "}`}>
+        <div className={`card md_uploads bg-base-200/65 shadow-xl/20 mb-5 p-3 flex flex-col justify-between items-center gap-3 md:w-3/6 ${frpredictions.length === 0 || upLoadedImages.length === 0 ? "max-h-min" : "h-[70vh] "}`}>
           {
             upLoadedImages.length === 0
               ? loading && !loadedBtn
