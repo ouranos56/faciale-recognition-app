@@ -83,7 +83,7 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
                 <div ref={throughTextDivRef}>
                   {!fr.prediction
                     ? 'En attente...'
-                    : fr.prediction.length >= 10
+                    : fr.prediction.length >= 10 && fr.prediction.split('_').map(Number)[1].toString().slice(0, 6) === "NaN" && fr.prediction.split('_').map(Number)[1].toString().slice(0, 6) === ""
                       // ? fr.prediction
                       ? `Visage non détecté dans ${fr.prediction.split(' ')[9] + " " + fr.prediction.split(' ')[10]}`
                       : (fr.prediction.split('_').map(Number)[0] === 0
