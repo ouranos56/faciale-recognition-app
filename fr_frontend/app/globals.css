@@ -1188,7 +1188,7 @@ button {
   }
   .md_uploads{
     width: 85vw;
-    height: 100vh;
+    height: 75vh;
     margin: 0px;
   }
   .tour-tag::before {
@@ -1320,7 +1320,7 @@ button {
   }
   .md_uploads{
     width: 65vw;
-    height: 100vh;
+    height: 80vh;
     margin: 0px;
   }
   .cardImagesize{
