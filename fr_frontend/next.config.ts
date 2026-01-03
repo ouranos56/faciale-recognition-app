@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
+    qualities: [25, 50, 75 , 90],
     dangerouslyAllowSVG: true, // autorise les SVG
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     
