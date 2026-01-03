@@ -129,7 +129,7 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
                   className="radio radio-success bg-green-200 border-green-300 checked:bg-green-200 checked:text-green-600 checked:border-green-600 hover:border-green-600"
                   value={1}
                   title='Ces visages sont identiques '
-                  disabled={predValue ? true : false}
+                  disabled={predValue  && fr.prediction.split('_').map(Number)[1].toString().slice(0, 6) !== "NaN" && fr.prediction.split('_').map(Number)[1].toString().slice(0, 6) !== "" ? true : false}
                   onChange={(e) => {
                     setSelectedValue(Number(e.target.value));
                     setDisabled(false);
@@ -142,7 +142,7 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
                   className="radio radio-error bg-red-100 border-red-300 checked:bg-red-200 checked:text-red-600 checked:border-red-600 hover:border-red-600"
                   value={0}
                   title='Ces visages sont différents'
-                  disabled={!predValue ? true : false}
+                  disabled={!predValue && fr.prediction.split('_').map(Number)[1].toString().slice(0, 6) !== "NaN" && fr.prediction.split('_').map(Number)[1].toString().slice(0, 6) !== "" ? true : false}
                   onChange={(e) => {
                     setSelectedValue(Number(e.target.value));
                     setDisabled(false);
