@@ -72,7 +72,7 @@ def get_embedding(img_path):
         
 def fr_predict(imga_path, imgb_path, model_path):
     # Charger le modèle + scaler
-    print(f"Chargement du modèle depuis : {model_path.split('_')[4]}")
+    print(f"Chargement du modèle depuis : {model_path}")
     model_data = joblib.load(model_path)
     clf = model_data['classifier']
     scaler = model_data['scaler']
