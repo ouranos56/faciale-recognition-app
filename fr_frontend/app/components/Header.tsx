@@ -67,7 +67,7 @@ export default function Header() {
             < div
                 className={`${scrolldown === "down" ? "header_down" : "header_up"} md_header z-9 navbar shadow-sm backdrop-blur-[6px] bg-base-200/80`}
             >
-                <div className="navbar-start md_navbar justify-start gap-8 pl-6">
+                <div className="navbar-start md_navbar justify-start gap-4 pl6">
                     <div className="flex flex-row justify-center gap-4">
                         <Link href="/" className="a">Accueil</Link>
                         <Link href="../get-started" className="a">Commencer</Link>
@@ -98,7 +98,7 @@ export default function Header() {
             < div
                 className={`z-10 md_header navbar shadow-sm ${scrolldown === "down" ? "opacity-0" : "opacity-100"} backdrop-blur-[6px] bg-base-200/80`}
             >
-                <div className="navbar-start md_navbar md:justify-start gap-8 pl-6">
+                <div className="navbar-start md_navbar md:justify-start gap-4 pl6">
                     <div className="flex flex-row justify-center gap-4">
                         <Link href="/" className="a">Accueil</Link>
                         <Link href="../get-started" className="a">Commencer</Link>
