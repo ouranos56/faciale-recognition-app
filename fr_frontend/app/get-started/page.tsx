@@ -38,7 +38,7 @@ const parsePredictionValue = (prediction: string | null | undefined): boolean =>
     const [value] = prediction.split('_').map(Number);
     return value !== 0;
   } catch (error) {
-    console.error('Erreur lors du parsing de la prédiction:', error);
+    // console.error('Erreur lors du parsing de la prédiction:', error);
     return false;
   }
 };
@@ -185,18 +185,18 @@ export default function Home() {
 
 
 
-  const saveclientuploadedimages = () => {
-    const valueToStore: File[] = upLoadedImages.length > 0
-      ? upLoadedImages
-      : [];
+  // const saveclientuploadedimages = () => {
+  //   const valueToStore: File[] = upLoadedImages.length > 0
+  //     ? upLoadedImages
+  //     : [];
 
-    try {
-      localStorage.setItem('client_uploaded_images', JSON.stringify(valueToStore));
-    } catch (e) {
-      console.error("Erreur lors de la sauvegarde des images téléchargées:", e);
-    }
-    return valueToStore;
-  };
+  //   try {
+  //     localStorage.setItem('client_uploaded_images', JSON.stringify(valueToStore));
+  //   } catch (e) {
+  //     console.error("Erreur lors de la sauvegarde des images téléchargées:", e);
+  //   }
+  //   return valueToStore;
+  // };
 
   const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -205,12 +205,30 @@ export default function Home() {
       return;
     }
 
+    // Vérifier la taille de chaque fichier (3.5MB max)
+    const MAX_FILE_SIZE = 3.5 * 1024 * 1024; // 3.5MB en bytes
+    const oversizedFiles: string[] = [];
+    const autorizedFiles: File[] = [];
+
+    Array.from(files).forEach((file) => {
+      if (file.size > MAX_FILE_SIZE) {
+        oversizedFiles.push(file.name);
+      }else{
+        autorizedFiles.push(file);
+      }
+    });
+
+    if (oversizedFiles.length > 0) {
+      toast.error(`${oversizedFiles.length} fichier(s) volumineux (max 3.5MB)`);
+      
+    }
+
     setUploading(true);
 
     // Ajouter un délai de 2 secondes avant de mettre à jour l'état
     await new Promise(resolve => setTimeout(resolve, 2500));
 
-    setUpLoadedImages(prev => Array.isArray(prev) ? [...Array.from(files), ...prev] : Array.from(files));
+    setUpLoadedImages(prev => Array.isArray(prev) ? [...autorizedFiles, ...prev] : Array.from(files));
     setUploading(false);
   };
 
@@ -360,9 +378,9 @@ export default function Home() {
     });
   }, [selectedImages]);
 
-  if (loadingPage) {
-    saveclientuploadedimages();
-  }
+  // if (loadingPage) {
+  //   saveclientuploadedimages();
+  // }
 
   const onCtrlI = useCallback(() => {
     clickInputFileRef.current?.click();
@@ -547,7 +565,6 @@ export default function Home() {
     };
   }, []);
 
-  console.log("fr.predictions length:", frpredictions.length);
   return (
     <>
       {/* ------------------------ Get Started -------------------- */}
@@ -630,7 +647,7 @@ export default function Home() {
                       alt="Aperçu de l'image"
                       width={225}
                       height={225}
-                      // priority
+                      priority
                       className={`opacity-40 hover:opacity-50 transition-opacity duration-300 ${showImage ? 'block' : 'hidden'}`}
                     />
                   )}
