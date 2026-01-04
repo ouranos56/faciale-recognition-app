@@ -165,7 +165,7 @@ export default function Home() {
         params: { session_id: sid }
       });
 
-      await new Promise(resolve => setTimeout(resolve, 3600));
+      // await new Promise(resolve => setTimeout(resolve, 3600));
 
       setFrpredictions(res.data ?? []);
 
@@ -179,9 +179,8 @@ export default function Home() {
       if (!newU) {
         toast.error("Erreur de récupération des prédictions !");
       }
-    } finally {
-      setLoading(false);
-    }
+    } 
+    setLoading(false);
   }, [newU, sid]);
 
 
@@ -312,17 +311,19 @@ export default function Home() {
       toast.dismiss(loadingToast);
       toast.success("Images envoyées avec succès !");
 
-      setLoadingPostPred(true)
+      // setLoadingPostPred(true)
       setLoading(true);
 
       // Attendre un peu pour laisser le temps au modèle de faire la prédiction
-      await new Promise(resolve => setTimeout(resolve, 3600));
+      // await new Promise(resolve => setTimeout(resolve, 3600));
 
-      setLoadingPostPred(false)
+      // setLoadingPostPred(false)
 
       // Récupérer les nouvelles prédictions
       // la prédiction est déjà prête ici
       setFrpredictions((prev) => [res.data, ...prev]);
+
+      setLoading(false);
 
       setselectedImages([]);
 
@@ -332,14 +333,17 @@ export default function Home() {
       if (selectedImages.length === 2) {
         toast.error("Erreur lors de l'envoi des images !");
       }
-    } finally {
-      setLoadingPage(false);
     }
+    setLoadingPage(false);
+    
   };
 
   useEffect(() => {
-    getPredictions();
-  }, [getPredictions]);
+    // Ne pas appeler si sid n'est pas encore défini
+    if (sid) {
+      getPredictions();
+    }
+  }, [getPredictions, sid]);
 
   // useEffect(() => {
   //   if (frpredictions && frpredictions.length > 0) {
@@ -543,7 +547,7 @@ export default function Home() {
     };
   }, []);
 
-
+  console.log("fr.predictions length:", frpredictions.length);
   return (
     <>
       {/* ------------------------ Get Started -------------------- */}
@@ -580,12 +584,13 @@ export default function Home() {
                     alt="Aperçu de l'image"
                     width={250}
                     height={250}
-                    priority
+                    // priority
+                    loading="lazy"
                     className={`opacity-40 hover:opacity-55 transition-opacity duration-300 ${showImage ? 'flex' : 'hidden'}`}
                   />
                 </div>
 
-              : (<div className="justify-center items-center ">
+              : (<div className="mdpredsc justify-center items-center">
                 <div className={`flex my-4 h-3/4 flex-col gap-4 ${loadingPostPred ? 'flex' : 'hidden'}`}>
                   <div className="skeleton h-32 w-full"></div>
                   <div className="skeleton h-4 w-28"></div>
@@ -606,7 +611,7 @@ export default function Home() {
           }
         </div>
 
-        <div className={`card md_uploads bg-base-200/65 shadow-xl/20 mb-5 p-3 flex flex-col justify-between items-center gap-3 md:w-3/6 ${frpredictions.length === 0 || upLoadedImages.length === 0 ? "max-h-min" : "h-[70vh] "}`}>
+        <div className={`card md_uploads bg-base-200/65 shadow-xl/20 mb-5 p-3 flex flex-col justify-between items-center gap-3 md:w-3/6 ${frpredictions.length === 0 || upLoadedImages.length === 0 ? "max-h-min" : "h-[85vh] "}`}>
           {
             upLoadedImages.length === 0
               ? loading && !loadedBtn
@@ -625,7 +630,7 @@ export default function Home() {
                       alt="Aperçu de l'image"
                       width={225}
                       height={225}
-                      priority
+                      // priority
                       className={`opacity-40 hover:opacity-50 transition-opacity duration-300 ${showImage ? 'block' : 'hidden'}`}
                     />
                   )}
