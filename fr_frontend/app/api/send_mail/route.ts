@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
+export const runtime = "edge";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -8,7 +9,7 @@ export async function POST(req: Request) {
     const { firstname, name, email, message, consented } = await req.json();
 
     const data = await resend.emails.send({
-      from: "Resend <onboarding@resend.dev>",
+      from: "FR app <onboarding@resend.dev>",
       to: ["frinnovagen56bj@gmail.com"],
       subject: "FR App – Nouveau message",
       html: `
