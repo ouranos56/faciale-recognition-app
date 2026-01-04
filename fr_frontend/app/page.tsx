@@ -190,7 +190,8 @@ export default function Home() {
                         alt="Aperçu de l'image"
                         // width={1000}
                         // height={1250}
-                        priority
+                        // priority
+                        loading="lazy"
                         className="md:w-[70vw] md:h-[90vh] md_predex"
                     />
 
@@ -202,7 +203,8 @@ export default function Home() {
                                     src={PredEx_1}
                                     unoptimized
                                     alt="Aperçu de l'image"
-                                    priority
+                                    // priority
+                                    loading="lazy"
                                     className="md_predex1 md:hidden lg:hidden"
                                 />
                             </div>
@@ -211,7 +213,8 @@ export default function Home() {
                                     src={PredEx_2}
                                     unoptimized
                                     alt="Aperçu de l'image"
-                                    priority
+                                    // priority
+                                    loading="lazy"
                                     className="md_predex1 md:hidden lg:hidden"
                                 />
                             </div>
@@ -220,7 +223,8 @@ export default function Home() {
                                     src={PredEx_3}
                                     unoptimized
                                     alt="Aperçu de l'image"
-                                    priority
+                                    // priority
+                                    loading="lazy"
                                     className="md_predex1 md:hidden lg:hidden"
                                 />
                             </div>
@@ -253,6 +257,7 @@ export default function Home() {
                             <div className="justify-around">
                                 <Image
                                     src={GetStartedImage}
+                                    loading="lazy"
                                     unoptimized
                                     alt="Face vérification landscape"
                                     className="tour-image "
