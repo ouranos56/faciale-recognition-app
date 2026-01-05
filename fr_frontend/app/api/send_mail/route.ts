@@ -9,14 +9,14 @@ export async function POST(req: Request) {
     const { firstname, name, email, message, consented } = await req.json();
 
     const data = await resend.emails.send({
-      from: "Resend <onboarding@resend.dev>",
+      from: "FR App <onboarding@resend.dev>",
       to: ["frinnovagen56bj@gmail.com"],
       subject: "FR App – Nouveau message",
       html: `
         <p><b>Nom :</b> ${firstname} ${name}</p>
         <p><b>Email :</b> ${email}</p>
         <p>${message}</p>
-        <p><i>Consentement: ${consented ? "Oui" : "Non"}</i></p>
+        <p><i>Consent à être contacté: ${consented ? "Oui" : "Non"}</i></p>
       `,
     });
 
@@ -29,5 +29,6 @@ export async function POST(req: Request) {
     );
   }
 }
+
 
 
