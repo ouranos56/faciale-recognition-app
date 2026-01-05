@@ -38,6 +38,8 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
     }
   }
 
+  // if (fr) console.log("fr.prediction:", fr.prediction, "length",fr.prediction.length);
+
   return (
     <div key={fr.id} id={fr.id} className={`card bg-base-100 shadow-xl/20 mb-12 scroll-auto md:scroll-auto `} >
 
@@ -82,9 +84,11 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
               <div className="flex flex-row justify-center text-center gap-2 text-amber-700 dark:text-amber-600">
                 <div ref={throughTextDivRef}>
                   {!fr.prediction
-                    ? 'En attente...'
-                    : fr.prediction.length > 20 || isNaN(fr.prediction.split('_').map(Number)[0])
-                      // ? fr.prediction
+                    ? '...'
+                    // ? 'En attente...'
+                    : fr.prediction.length > 20 || isNaN(fr.prediction.split('_').map(Number)[0] ?? NaN)
+                      // ? fr.prediction 57bc0b54-01de-4866-a4c4-a1cb42913629
+                      // && fr.prediction.split('_').map(Number)[1].toString().slice(0, 6) !== "NaN" && fr.prediction.split('_').map(Number)[1].toString().slice(0, 6) !== "" 
                       ? `Visage non détecté dans ${fr.prediction.split(' ')[9] + " " + fr.prediction.split(' ')[10]}`
                       : (fr.prediction.split('_').map(Number)[0] === 0
                         ? 'Visages différents'
@@ -96,7 +100,7 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
               </div>
             </td>
             <td className="justify-center items-center pl-[13%] pr-0">
-              {fr.prediction && !isNaN(fr.prediction.split('_').map(Number)[1])
+              {fr.prediction && !isNaN(fr.prediction.split('_').map(Number)[1] ?? NaN)              
                 ? `${(fr.prediction.split('_').map(Number)[1] * 100).toFixed(2)} %`
                 // : "Indisponible."
                 : "--"
@@ -129,7 +133,8 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
                   className="radio radio-success bg-green-200 border-green-300 checked:bg-green-200 checked:text-green-600 checked:border-green-600 hover:border-green-600"
                   value={1}
                   title='Ces visages sont identiques '
-                  disabled={predValue && !isNaN(fr.prediction.split('_').map(Number)[0]) ? true : false}
+                  disabled={predValue && fr.prediction && !isNaN(fr.prediction.split('_').map(Number)[0] ?? NaN) ? true : false}
+                  // disabled={predValue && !isNaN(fr.prediction.split('_').map(Number)[0]) ? true : false}
                   onChange={(e) => {
                     setSelectedValue(Number(e.target.value));
                     setDisabled(false);
@@ -142,7 +147,7 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
                   className="radio radio-error bg-red-100 border-red-300 checked:bg-red-200 checked:text-red-600 checked:border-red-600 hover:border-red-600"
                   value={0}
                   title='Ces visages sont différents'
-                  disabled={!predValue && !isNaN(fr.prediction.split('_').map(Number)[0]) ? true : false}
+                  disabled={!predValue && fr.prediction && !isNaN(fr.prediction.split('_').map(Number)[0] ?? NaN) ? true : false}
                   onChange={(e) => {
                     setSelectedValue(Number(e.target.value));
                     setDisabled(false);
