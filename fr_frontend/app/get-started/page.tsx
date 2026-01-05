@@ -38,7 +38,7 @@ const parsePredictionValue = (prediction: string | null | undefined): boolean =>
     const [value] = prediction.split('_').map(Number);
     return value !== 0;
   } catch (error) {
-    // console.error('Erreur lors du parsing de la prédiction:', error);
+    console.error('Erreur lors du parsing de la prédiction:', error);
     return false;
   }
 };
@@ -225,8 +225,8 @@ export default function Home() {
 
     setUploading(true);
 
-    // Ajouter un délai de 2 secondes avant de mettre à jour l'état
-    await new Promise(resolve => setTimeout(resolve, 2500));
+    // Ajouter un délai de 2.5 secondes avant de mettre à jour l'état
+    await new Promise(resolve => setTimeout(resolve, 500));
 
     setUpLoadedImages(prev => Array.isArray(prev) ? [...autorizedFiles, ...prev] : Array.from(files));
     setUploading(false);
@@ -311,7 +311,7 @@ export default function Home() {
 
       formData.append('img1', file1);
       formData.append('img2', file2);
-      formData.append('selected_model', selectedmodel.toString());
+      formData.append('selected_model', selected_model.toString());
       formData.append('session_id', sid as string || "");
 
       // Envoyer la requête avec FormData
@@ -565,6 +565,7 @@ export default function Home() {
     };
   }, []);
 
+  // console.log("fr.predictions length:", frpredictions.length);
   return (
     <>
       {/* ------------------------ Get Started -------------------- */}
@@ -601,8 +602,8 @@ export default function Home() {
                     alt="Aperçu de l'image"
                     width={250}
                     height={250}
-                    // priority
-                    loading="lazy"
+                    priority
+                    // loading="lazy"
                     className={`opacity-40 hover:opacity-55 transition-opacity duration-300 ${showImage ? 'flex' : 'hidden'}`}
                   />
                 </div>
@@ -647,7 +648,7 @@ export default function Home() {
                       alt="Aperçu de l'image"
                       width={225}
                       height={225}
-                      priority
+                      // priority
                       className={`opacity-40 hover:opacity-50 transition-opacity duration-300 ${showImage ? 'block' : 'hidden'}`}
                     />
                   )}
@@ -726,7 +727,7 @@ export default function Home() {
           </div> */}
             <fieldset className="fieldset">
 
-              <legend className="flex flex-row justify-center items-center fieldset-legend opacity-55">
+              <legend className="flex flex-row justify-center text-sm text-center items-center fieldset-legend opacity-55">
                 Importer des images
                 <div className="flex flex-row justify-center items-center gap-1 ">
                   <kbd className="kbd kbd-sm text-amber-700">Ctrl/⌘</kbd>
