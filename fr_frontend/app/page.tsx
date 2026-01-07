@@ -170,9 +170,9 @@ export default function Home() {
                     <div className=" text-justify p-5 md_essayer_text">
                         Bienvenue dans une nouvelle ère où la technologie n’est plus seulement un outil, mais un moteur d’évolution.<br />
 
-                        <br />Tout un univers où la technologie n’est plus seulement un outil, mais une expérience s&apos;offre à vous.<br />
+                        <br />Tout un univers où la technologie n’est plus qu'un outil, mais une expérience qui s&apos;offre à vous.<br />
 
-                        Notre plateforme utilise une intelligence artificielle de reconnaissance faciale pour analyser et comparer avec une finesse surprenante. Pas besoin d’un niveau expert : tout est pensé pour être naturel, rapide, presque intuitif.<br />
+                        Notre plateforme utilise une intelligence artificielle (algorithme) de reconnaissance faciale pour analyser et comparer avec une finesse surprenante. Pas besoin d’un niveau expert pour l'utiliser: tout est pensé pour être naturel, rapide, presque intuitif.<br />
 
                         <br />Ce n’est pas de la science-fiction. C’est maintenant. Essayez-la en un clic!
                     </div>
@@ -278,12 +278,12 @@ export default function Home() {
                     </div>
 
                     <div className="card bg-base-200 shadow-xl md_commencer_text md:w-[40%] h[65vh] p-3 text-[#3f280f] text-justify md:text-xl uploadedimagecard">
-                        Ici, l’IA n’est pas un concept compliqué : c’est une expérience.<br />
+                        Ici, l’IA n’est pas un concept compliqué : c’est une expérience captivante.<br />
 
-                        <br />Notre outil combine l’intelligence artificielle avec une simplicité presque humaine.
-                        Ce projet place l’intelligence artificielle au cœur de l’expérience utilisateur.<br />
+                        <br />Notre outil n’essaie pas d’être parfait : il essaie d’être utile, clair, passionnant.
+                        Il est le fruit d'un dur labeur, de sacrifices, c'est l'aboutissement de notre créativité.
 
-                        <br />Laissez-vous guider. Essayez-le! Le futur pourrait bien commencer ici.
+                        <br />Laissez-vous tenter. Essayez-le! Le futur pourrait bien commencer ici.
                     </div>
                 </div>
 
