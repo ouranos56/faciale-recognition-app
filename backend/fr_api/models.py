@@ -88,6 +88,14 @@ class UploadImageAndPredict(models.Model):
         blank=True,
         verbose_name="ID de session"    
     )
+    
+    feedback = models.FloatField(
+        blank=True, 
+        null=True, 
+        editable=True, 
+        default= 0.0, 
+        verbose_name = "Feedback"
+    ) 
 
     class Meta:
         verbose_name = "Image"
