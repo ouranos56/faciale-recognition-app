@@ -15,7 +15,7 @@ import PictureGif from "../assets/picture.gif";
 import Compare2PersonsGif from "../assets/social-distance.gif";
 import CapturePictures from "../components/CapturePictures";
 // import Compare2PersonsGif from "./assets/population.gif";
-
+import FeedBacK from "../components/FeedBack";
 
 // export
 type FRApiresponse = {
@@ -565,7 +565,19 @@ export default function Home() {
     };
   }, []);
 
-  // console.log("fr.predictions length:", frpredictions.length);
+  
+  const [showFeedBack, setShowFeedBack] = useState<boolean>(false);
+
+  useEffect(() => {
+    const feedbackFlag = localStorage.getItem("showfeedback");
+    if (frpredictions && feedbackFlag === "false" && frpredictions.length >= 3) {
+      setShowFeedBack(true);
+      localStorage.setItem("showfeedback", showFeedBack.toString());
+    }else {
+      setShowFeedBack(false);
+    }
+  }, [frpredictions, showFeedBack]);
+  
   return (
     <>
       {/* ------------------------ Get Started -------------------- */}
@@ -573,6 +585,8 @@ export default function Home() {
 
       <div className={`w-[75vw] md_body px48 bg-[#f7f5f35b] flex md:flex-row justify-between items-center md:gap-12 ${frpredictions.length !== 0 || upLoadedImages.length !== 0 ? "min-h-screen py-20" : "py-6 h-svh "} `}>
         <div className="loader z-20"></div>
+
+        <FeedBacK showFeedBack= {showFeedBack} />
 
         <div className={`bg-base-100 md_preds shadow-xl rounded-box border-3 border-base-content/12 justify-center items-center gap-4 p-2 overflow-auto md:overflow-scroll uploadedimagecard md:w-[80%] ${frpredictions.length === 0 ? "max-h-min" : " h-[90vh]"}`}
           ref={predictionsContainerRef}
