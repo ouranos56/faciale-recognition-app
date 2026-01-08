@@ -54,13 +54,14 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
               //   : fr.img1
               // } 
               alt="People picture"
-              sizeClass="h-[35vh] w-[20vw] cardImagesize"
+              //  sizeClass="h-[35vh] w-[20vw] cardImagesize"
+              sizeClass="h-[32vh] w-[18vw] cardImagesize"
               priority={true} //ce qui signifie que l'image doit être chargée dès que possible
             />
             <CardImage
               src={fr.img2_url ?? ""}
               alt="People picture"
-              sizeClass="h-[35vh] w-[20vw] cardImagesize"
+              sizeClass="h-[32vh] w-[18vw] cardImagesize"
               priority={true} //ce qui signifie que l'image doit être chargée dès que possible
             />
           </div>
