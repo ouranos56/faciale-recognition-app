@@ -31,7 +31,7 @@ export default function FeedBacK({ showFeedBack }: FeedBacKProps) {
     try {
       // Créer une promesse qui combine la requête API et le délai
       const reqpromise = fr_api.patch(
-        `predictions/${sid}/`,
+        `predictions/session_sid/${sid}/`,
         {
           feedback: feedback
         }
@@ -132,4 +132,5 @@ export default function FeedBacK({ showFeedBack }: FeedBacKProps) {
 //     page_path: window.location.pathname,
 //   });
 // };
+
 
