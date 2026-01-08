@@ -570,6 +570,11 @@ export default function Home() {
 
   useEffect(() => {
     const feedbackFlag = localStorage.getItem("showfeedback");
+
+    if (!feedbackFlag) {
+      localStorage.setItem("showfeedback", "false");
+    }
+    
     if (frpredictions && feedbackFlag === "false" && frpredictions.length >= 3) {
       
       const timer = setTimeout(() => {
