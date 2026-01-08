@@ -77,18 +77,18 @@ class RetrieveUpdateWrongPredictionView(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
          
 
-class RetrieveUserUpdateFeedBackView(APIView):
-    serializer_class = UploadImageAndPredictSerializer
+# class RetrieveUserUpdateFeedBackView(APIView):
+#     serializer_class = UploadImageAndPredictSerializer
         
-    def patch(self, request, session_id):
-        feedback = request.data.get("feedback")
+#     def patch(self, request, session_id):
+#         feedback = request.data.get("feedback")
 
-        if feedback is None:
-            return Response({"error": "feedback is required"}, status=400)
+#         if feedback is None:
+#             return Response({"error": "feedback is required"}, status=400)
 
-        updated = UploadImageAndPredict.objects.filter(session_id=session_id).update(feedback=feedback)
+#         updated = UploadImageAndPredict.objects.filter(session_id=session_id).update(feedback=feedback)
 
-        return Response({"updated_rows": updated})
+#         return Response({"updated_rows": updated})
          
 
 
