@@ -292,6 +292,7 @@ export default function Home() {
 
   const handlePostImageToPredict = async () => {
     setLoadingPage(true);
+    let loadingToast= "";
     try {
 
       if (selectedImages.length !== 2) {
@@ -304,7 +305,8 @@ export default function Home() {
       const selected_model = selectedmodel;
       const sid = getOrCreateClientSessionId();
 
-      const loadingToast = toast.loading("Envoi des images pour prédiction...");
+      loadingToast = toast.loading("Envoi des images pour prédiction...");
+      // const loadingToast = toast.loading("Envoi des images pour prédiction...");
 
       // FormData pour envoyer les fichiers
       const formData = new FormData();
@@ -341,12 +343,13 @@ export default function Home() {
       // la prédiction est déjà prête ici
       setFrpredictions((prev) => [res.data, ...prev]);
 
-      setLoading(false);
+      // setLoading(false);
 
       setselectedImages([]);
 
       setLoading(false);
     } catch (error) {
+      toast.dismiss(loadingToast);
       console.error("Erreur lors de l'envoi des images:", error);
       if (selectedImages.length === 2) {
         toast.error("Erreur lors de l'envoi des images !");
@@ -715,6 +718,7 @@ export default function Home() {
                   handlePostImageToPredict();
                   if (newU) setNewU(false);
                 }}
+                disabled={loadingPage}
                 title="Ctrl + Enter"
                 ref={clickSendPredictFilesRef}
               >Comparer
