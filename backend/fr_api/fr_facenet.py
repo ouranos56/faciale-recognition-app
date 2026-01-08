@@ -7,7 +7,8 @@ from facenet_pytorch import MTCNN, InceptionResnetV1
 from .utils.image_loader import load_image_from_url
 
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cpu')
 print("\tDevice:", device)
 
 # modèles (MTCNN pour detection + InceptionResnetV1 pour embeddings)
@@ -15,8 +16,10 @@ mtcnn = MTCNN(
     image_size=160, 
     margin=20,  # la marge
     min_face_size=30,  # la taille minimale
-    thresholds=[0.5, 0.6, 0.6],  # les seuils
-    device=device
+    # thresholds=[0.5, 0.6, 0.6],  les seuils
+    thresholds=[0.6, 0.7, 0.7],  # les seuils
+    device=device,
+    post_process=True
 )
 
 # Chargement global (1 fois)
