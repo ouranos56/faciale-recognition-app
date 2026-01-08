@@ -3,10 +3,10 @@
 import React, { useState } from "react";
 import Image from "next/image"
 import PredEx from "./assets/PredEx.png"
-import PredEx1 from "./assets/PredEx1.png"
-import PredEx_1 from "./assets/PredEx_6.png"
-import PredEx_2 from "./assets/PredEx_7.png"
-import PredEx_3 from "./assets/PredEx_8.png"
+import PredEx_1 from "./assets/PredEx_1.png"
+import PredEx_2 from "./assets/PredEx_2.png"
+import PredEx_3 from "./assets/PredEx_3.png"
+import PredEx_4 from "./assets/PredEx_4.png"
 import GetStartedImage from "./assets/get-started-1.png"
 import { useEffect, useRef } from "react";
 import Link from "next/link";
@@ -221,6 +221,16 @@ export default function Home() {
                             <div className="carousel-item">
                                 <Image
                                     src={PredEx_3}
+                                    unoptimized
+                                    alt="Aperçu de l'image"
+                                    // priority
+                                    loading="lazy"
+                                    className="md_predex1 md:hidden lg:hidden"
+                                />
+                            </div>
+                            <div className="carousel-item">
+                                <Image
+                                    src={PredEx_4}
                                     unoptimized
                                     alt="Aperçu de l'image"
                                     // priority
