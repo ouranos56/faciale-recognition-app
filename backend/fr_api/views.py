@@ -74,18 +74,18 @@ class UploadedImagesPredictionView(generics.ListCreateAPIView):
 class RetrieveUpdateWrongPredictionView(generics.RetrieveUpdateDestroyAPIView):
     queryset = UploadImageAndPredict.objects.all()
     serializer_class = UploadImageAndPredictSerializer
-    # lookup_field = "id"
-    def get_object(self):
-        id = self.kwargs.get("id")
-        sid = self.kwargs.get("session_id")
+    lookup_field = "id"
+    # def get_object(self):
+    #     id = self.kwargs.get("id")
+    #     sid = self.kwargs.get("session_id")
 
-        if id:
-            return UploadImageAndPredict.objects.get(id=id)
+    #     if id:
+    #         return UploadImageAndPredict.objects.get(id=id)
 
-        if sid:
-            return UploadImageAndPredict.objects.get(session_id=sid)
+    #     if sid:
+    #         return UploadImageAndPredict.objects.get(session_id=sid)
 
-        raise NotFound("id ou session_id requis")
+    #     raise NotFound("id ou session_id requis")
          
 
 
