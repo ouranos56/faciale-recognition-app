@@ -75,6 +75,7 @@ class RetrieveUpdateWrongPredictionView(generics.RetrieveUpdateDestroyAPIView):
     queryset = UploadImageAndPredict.objects.all()
     serializer_class = UploadImageAndPredictSerializer
     lookup_field = "id"
+        
     # def get_object(self):
     #     id = self.kwargs.get("id")
     #     sid = self.kwargs.get("session_id")
@@ -86,6 +87,12 @@ class RetrieveUpdateWrongPredictionView(generics.RetrieveUpdateDestroyAPIView):
     #         return UploadImageAndPredict.objects.get(session_id=sid)
 
     #     raise NotFound("id ou session_id requis")
+         
+
+class RetrieveUserUpdateFeedBackView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UploadImageAndPredict.objects.all()
+    serializer_class = UploadImageAndPredictSerializer
+    lookup_field = "session_id"
          
 
 
