@@ -575,8 +575,7 @@ export default function Home() {
       const timer = setTimeout(() => {
       setShowFeedBack(true);
       localStorage.setItem("showfeedback", showFeedBack.toString());
-      }, 60000);
-      
+      }, 60000);      
       return () => clearTimeout(timer);
     }else {
       setShowFeedBack(false);
