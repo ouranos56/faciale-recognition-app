@@ -47,7 +47,7 @@ export default function FeedBacK({ showFeedBack }: FeedBacKProps) {
         reqpromise,
         {
           loading: 'Envoi de la note...',
-          success: `Note envoyée avec succès ! \nMerci pour votre contribution !`,
+          success: `Note envoyée avec succès ! \n\n Merci pour votre contribution !`,
           error: 'Erreur lors de l\'envoi de la note !',
         },
         {
@@ -132,6 +132,7 @@ export default function FeedBacK({ showFeedBack }: FeedBacKProps) {
 //     page_path: window.location.pathname,
 //   });
 // };
+
 
 
 
