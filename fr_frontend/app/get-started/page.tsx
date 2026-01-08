@@ -571,11 +571,16 @@ export default function Home() {
   useEffect(() => {
     const feedbackFlag = localStorage.getItem("showfeedback");
     if (frpredictions && feedbackFlag === "false" && frpredictions.length >= 3) {
+      
+      const timer = setTimeout(() => {
       setShowFeedBack(true);
       localStorage.setItem("showfeedback", showFeedBack.toString());
+      }, 60000);
+      
+      return () => clearTimeout(timer);
     }else {
       setShowFeedBack(false);
-    }
+    }    
   }, [frpredictions, showFeedBack]);
   
   return (
