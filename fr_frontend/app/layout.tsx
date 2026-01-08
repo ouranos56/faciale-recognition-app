@@ -7,6 +7,8 @@ import Header from "./components/Header";
 import { Ubuntu } from 'next/font/google';
 import { Ms_Madi } from 'next/font/google';
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import GoogleAnalytics from "@/app/components/GoogleAnalytics"
+// import AnalyticsTracker from "@/app/hookq/AnalyticsTracker"
 
 // Configuration de la police Ubuntu
 const ubuntu = Ubuntu({
@@ -55,6 +57,9 @@ export default function RootLayout({
         className={`${ubuntu.className} antialiased  background-gri grid-lines`}
         style={{ fontFamily: '"Ubuntu", sans-serif' }}
       >
+        <GoogleAnalytics />
+        {/* <AnalyticsTracker /> */}
+        
         <SpeedInsights />
         <Header />
         <Toaster
