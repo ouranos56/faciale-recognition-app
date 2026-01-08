@@ -170,7 +170,7 @@ export default function Home() {
                     <div className=" text-justify p-5 md_essayer_text">
                         Bienvenue dans une nouvelle ère où la technologie cesse d&apos;être un simple outil pour devenir un véritable moteur d&apos;innovation.<br />
                         <br />Notre plateforme repose sur un algorithme d&apos;intelligence artificielle pour la reconnaissance faciale, capable d&apos;analyser et de comparer les profils avec grande précision et finesse. 
-                        Conçue pour être accessible à tous, elle ne nécessite aucune expertise : l&apos;interface est intuitive, rapide et pensée pour un usage simple.
+                        Conçue pour être accessible à tous, elle ne nécessite aucune expertise : l&apos;interface est intuitive, rapide et pensée pour un usage simple.<br />
 
                         <br />Ce n&apos;est pas de la science-fiction. C&apos;est maintenant. Essayez-la en un clic!
                     </div>
@@ -289,7 +289,7 @@ export default function Home() {
                         Ici, l&apos;IA n&apos;est pas un concept abstrait, mais une expérience concrète et captivante.<br />
 
                         <br />Notre solution privilégie l&apos;efficacité et la clarté; elle n&apos;essaie pas d&apos;être parfaite : elle a été conçue pour être utile, intuitive et stimulante.
-                         Fruit d&apos;un travail rigoureux et d&apos;une démarche créative, elle incarne notre engagement envers des technologies porteuses de valeur.
+                         Fruit d&apos;un travail rigoureux et d&apos;une démarche créative, elle incarne notre engagement envers des technologies porteuses de valeur.<br />
 
                         <br />Essayez-la dès maintenant, l’avenir commence peut-être ici.
                     </div>
