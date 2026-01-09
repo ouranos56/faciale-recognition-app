@@ -101,7 +101,7 @@ def fr_predict(imga_path, imgb_path, model_path):
     pred = clf.predict(feat_s)
     if hasattr(clf, "predict_proba"):
         proba = clf.predict_proba(feat_s)[0, 1]
-        print(f"\nPrédiction: {pred[0]}, Probabilité/Taux de concordance : {proba*100:.2f}%")
+        print(f"\nPrédiction: {pred[0]}, Probabilité/Taux de concordance : {proba*100:.6f}%")
     else:
         proba = None
         print(f"\nPrédiction: {pred[0]}, Probabilité/Taux de concordance : {proba}")
@@ -109,4 +109,5 @@ def fr_predict(imga_path, imgb_path, model_path):
     print(f"Pred: {pred}")
     print("\n\t\t✅Identiques✅\n\n" if pred[0] == 1 else "\n\t\t❌❌Différents❌❌\n\n")
 
-    return f"{int(pred[0])}_{float(round(proba, 4))}"
+    # return f"{int(pred[0])}_{float(round(proba, 4))}"
+    return f"{int(pred[0])}_{proba:.6f}"
