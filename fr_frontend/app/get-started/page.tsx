@@ -252,18 +252,19 @@ export default function Home() {
         reqpromise,
         {
           loading: 'Envoi de la correction...',
-          success: 'Correction envoyée avec succès !',
+          success: 'Correction envoyée avec succès !\n\nMerci pour votre contribution !',
           error: 'Erreur lors de l\'envoi de la correction !',
         },
         {
           duration: 3000, // Durée d'affichage des toasts success/error
         }
-      ).then(async response => {
-        // Ajouter un délai de 2 secondes après la réponse
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        return response
-      });
-      toast.success("Merci pour votre contribution !");
+      )
+      //   .then(async response => {
+      //   // Ajouter un délai de 2 secondes après la réponse
+      //   await new Promise(resolve => setTimeout(resolve, 2000));
+      //   return response
+      // });
+      // toast.success("Merci pour votre contribution !");
 
     } catch (error) {
       console.error("Erreur lors de l'envoi de la correction:", error);
