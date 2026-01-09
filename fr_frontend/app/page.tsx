@@ -176,7 +176,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="flex md_comparer mb-3.5 H1 w-[96vw] items-center justify-center " aria-label="Comparer de visages,">
+                <div className="flex md_comparer mb-5 H1 w-[96vw] items-center justify-center " aria-label="Comparer de visages,">
                     <div className="text-center md:w-fit ">Comparer des visages,&nbsp;</div>
                     <div className="typewriter text-wrap"></div>
                 </div>
@@ -248,7 +248,7 @@ export default function Home() {
 
                 <div
                     ref={BottElemwref}
-                    className="flex md:flex-row opacity-0 md:gap-16 md_commencer_container justify-center items-center md:w-[85vw] md:h-[70vh] mt-20 "
+                    className="flex md:flex-row mb-8 opacity-0 md:gap-16 md_commencer_container justify-center items-center md:w-[85vw] md:h-[70vh] mt-20 "
                 >
                     <div className="tour-card md:w-[65%] md:h-[66vh]">
 
@@ -286,7 +286,7 @@ export default function Home() {
                     </div>
 
                     <div className="card bg-base-200 shadow-xl md_commencer_text md:w-[40%] h[65vh] p-3 text-[#3f280f] text-justify md:text-xl uploadedimagecard">
-                        Ici, l&apos;IA n&apos;est pas un concept abstrait, mais une expérience concrète et captivante.<br />
+                        Pour nous, l&apos;IA n&apos;est pas un concept abstrait, mais une expérience concrète et captivante.<br />
 
                         <br />Notre solution privilégie l&apos;efficacité et la clarté; elle n&apos;essaie pas d&apos;être parfaite : elle a été conçue pour être utile, intuitive et stimulante.
                          Fruit d&apos;un travail rigoureux et d&apos;une démarche créative, elle incarne notre engagement envers des technologies porteuses de valeur.<br />
