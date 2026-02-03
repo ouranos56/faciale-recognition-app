@@ -49,12 +49,7 @@ export default function PredictCard({ fr, index, predValue, handleSendCorrection
 
             <CardImage
               src={fr.img1_url ?? ""}
-              //  src={fr.img1 instanceof File
-              //   ? URL.createObjectURL(fr.img1)
-              //   : fr.img1
-              // } 
               alt="People picture"
-              //  sizeClass="h-[35vh] w-[20vw] cardImagesize"
               sizeClass="h-[32vh] w-[18vw] cardImagesize"
               priority={true} //ce qui signifie que l'image doit être chargée dès que possible
             />

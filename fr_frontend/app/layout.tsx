@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { Ubuntu } from 'next/font/google';
-import { Ms_Madi } from 'next/font/google';
-import { SpeedInsights } from "@vercel/speed-insights/next"
+// import { SpeedInsights } from "@vercel/speed-insights/next"
 import GoogleAnalytics from "@/app/components/GoogleAnalytics"
 // import AnalyticsTracker from "@/app/hookq/AnalyticsTracker"
 
@@ -20,28 +18,9 @@ const ubuntu = Ubuntu({
   preload: true,
 });
 
-const msMadi = Ms_Madi({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal'],
-  display: 'swap',
-  variable: '--font-ms-madi',
-  preload: true,
-});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: "EDIYA - Facial Recognition",
-  description: "Plateforme de reconnaissance faciale avec IA",
+  description: "Plateforme de reconnaissance faciale basée sur une IA",
 };
 
 export default function RootLayout({
@@ -54,13 +33,12 @@ export default function RootLayout({
     <html lang="fr" data-theme="silk" className={ubuntu.variable}>
 
       <body
-        className={`${ubuntu.className} antialiased  background-gri grid-lines`}
+        className={`${ubuntu.className} antialiased grid-lines`}
         style={{ fontFamily: '"Ubuntu", sans-serif' }}
       >
         <GoogleAnalytics />
         {/* <AnalyticsTracker /> */}
         
-        <SpeedInsights />
         <Header />
         <Toaster
           position="top-center"

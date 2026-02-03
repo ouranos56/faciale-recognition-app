@@ -64,19 +64,6 @@ export default function Home() {
   const clickSendPredictFilesRef = useRef<HTMLButtonElement>(null);
 
 
-
-  // const saveSessionId = (sessionId?: string | null) => {
-  //   // Ne rien faire si valeur invalide
-  //   if (!sessionId || sessionId === "undefined") {
-  //     console.warn("saveSessionId: sessionId invalide, ignore.");
-  //     return null;
-  //   }
-  //   localStorage.setItem('client_session_id', sessionId as string);
-  //   return sessionId as string;}
-
-
-
-
   const getOrCreateClientSessionId = () => {
     // Nettoyage si "undefined" a été stocké par erreur
     const raw = localStorage.getItem('client_session_id');
@@ -113,50 +100,6 @@ export default function Home() {
   }, []);
 
 
-  // const getPredictions = useCallback(async () => {
-  //   setLoading(true);
-  //   try {
-  //     const res = await fr_api.get<FRApiresponse[]>("predictions/");
-  //     setFrpredictions(res.data ?? []);
-  //     toast.success("Prédictions récupérées avec succès !");
-
-  //   } catch (error) {
-  //     console.error("Erreur de récupération des prédictions:", error);
-
-  //     const existingsid = localStorage.getItem('client_session_id');
-  //     clientsessionId();
-
-  //     if (existingsid && existingsid !== "undefined") {
-  //       toast.error("Erreur de récupération des prédictions !");
-  //       return;
-  //     }
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }, [setFrpredictions]);
-
-  // const clientsessionId = () => {
-  //   // Utilise crypto.randomUUID() si dispo (modern browsers)
-  //   const existingsid = localStorage.getItem('client_session_id');
-  //   if (existingsid && existingsid !== "undefined") {
-  //     setSid(existingsid);
-  //     toast.success("Bon retour !")
-  //     return existingsid;
-  //   }
-
-  //   toast.success("Bienvenu !")
-  //   const newSid = (typeof crypto !== "undefined" && "randomUUID" in crypto)
-  //     ? (crypto).randomUUID()
-  //     : uuidv4();
-
-  //   console.log("Generated new session ID:", newSid);
-  //   localStorage.setItem('client_session_id', newSid);
-  //   setSid(newSid);
-  //   return newSid;
-  // };
-
-
-
   const getPredictions = useCallback(async () => {
     setLoading(true);
     try {
@@ -182,21 +125,6 @@ export default function Home() {
     } 
     setLoading(false);
   }, [newU, sid]);
-
-
-
-  // const saveclientuploadedimages = () => {
-  //   const valueToStore: File[] = upLoadedImages.length > 0
-  //     ? upLoadedImages
-  //     : [];
-
-  //   try {
-  //     localStorage.setItem('client_uploaded_images', JSON.stringify(valueToStore));
-  //   } catch (e) {
-  //     console.error("Erreur lors de la sauvegarde des images téléchargées:", e);
-  //   }
-  //   return valueToStore;
-  // };
 
   const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -280,12 +208,10 @@ export default function Home() {
           : prevImgs;                         // Pas de changement si déjà 2 sélectionnées
 
       // Log avec la nouvelle valeur
-      console.log("selectedImages " + (prevImgs.includes(img) ? "removed" : "added") + ":", {
-        previous: prevImgs,
-        new: newImg,
-        img: img,
-        count: newImg.length
-      });
+      console.log("selectedImages " + 
+        (prevImgs.includes(img) ? "removed" : "added") + 
+        ":", {count: newImg.length}
+      );
 
       return newImg;
     });
@@ -307,7 +233,6 @@ export default function Home() {
       const sid = getOrCreateClientSessionId();
 
       loadingToast = toast.loading("Envoi des images pour prédiction...");
-      // const loadingToast = toast.loading("Envoi des images pour prédiction...");
 
       // FormData pour envoyer les fichiers
       const formData = new FormData();
@@ -318,7 +243,6 @@ export default function Home() {
       formData.append('session_id', sid as string || "");
 
       // Envoyer la requête avec FormData
-      // const response = await 
       const res = await fr_api.post(
         'predictions/',
         formData,
@@ -332,19 +256,11 @@ export default function Home() {
       toast.dismiss(loadingToast);
       toast.success("Images envoyées avec succès !");
 
-      // setLoadingPostPred(true)
       setLoading(true);
-
-      // Attendre un peu pour laisser le temps au modèle de faire la prédiction
-      // await new Promise(resolve => setTimeout(resolve, 3600));
-
-      // setLoadingPostPred(false)
 
       // Récupérer les nouvelles prédictions
       // la prédiction est déjà prête ici
       setFrpredictions((prev) => [res.data, ...prev]);
-
-      // setLoading(false);
 
       setselectedImages([]);
 
@@ -367,13 +283,6 @@ export default function Home() {
     }
   }, [getPredictions, sid]);
 
-  // useEffect(() => {
-  //   if (frpredictions && frpredictions.length > 0) {
-  //     const tsid = frpredictions[0]?.session_id;
-  //     saveSessionId(tsid);
-  //   };
-  // }, [frpredictions]);
-
 
   useEffect(() => {
     console.log("État actuel des sélections:", {
@@ -382,14 +291,9 @@ export default function Home() {
     });
   }, [selectedImages]);
 
-  // if (loadingPage) {
-  //   saveclientuploadedimages();
-  // }
-
   const onCtrlI = useCallback(() => {
     clickInputFileRef.current?.click();
     console.log("Ctrl/Cmd + I déclenché via hook !");
-    // ton code
   }, []);
 
   useCtrlI(onCtrlI);
@@ -397,82 +301,14 @@ export default function Home() {
   const onEnter = useCallback(() => {
     clickSendPredictFilesRef.current?.click();
     console.log("Enter déclenché via hook !");
-    // ton code
   }, []);
 
   useEnter(onEnter);
-
-  // const handleImageCapture = async () => {
-  //   try {
-  //     // Demander l'accès à la caméra
-  //     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-
-  //     // Créer un élément vidéo pour afficher le flux
-  //     const video = document.createElement('video');
-  //     video.srcObject = stream;
-  //     await video.play();
-
-  //     // Créer un canvas pour capturer l'image
-  //     const canvas = document.createElement('canvas');
-  //     canvas.width = video.videoWidth;
-  //     canvas.height = video.videoHeight;
-
-  //     // Dessiner l'image sur le canvas
-  //     const context = canvas.getContext('2d');
-  //     if (context) {
-  //       context.drawImage(video, 0, 0, canvas.width, canvas.height);
-  //     }
-
-  //     // Convertir le canvas en blob
-  //     const blob = await new Promise<Blob>((resolve) => {
-  //       canvas.toBlob((blob) => {
-  //         if (blob) resolve(blob);
-  //       }, 'image/jpeg', 0.95);
-  //     });
-
-  //     // Créer un fichier à partir du blob
-  //     const file = new File([blob], `capture-${Date.now()}.jpg`, { type: 'image/jpeg' });
-
-  //     // Ajouter l'image capturée à la liste
-  //     setUpLoadedImages(prev => [file, ...prev]);
-
-  //     // Arrêter la caméra
-  //     stream.getTracks().forEach(track => track.stop());
-
-  //     toast.success('Image capturée avec succès !');
-  //   } catch (error) {
-  //     console.error('Erreur lors de la capture :', error);
-  //     toast.error('Erreur lors de la capture de l\'image');
-  //   }
-  // };
-
-
-
-
-
-  // const handleImageCapture = () => {
-  //   openCamera('user');
-  // };
-
-  const [isCameraOpen, setIsCameraOpen] = useState(false);
-
-
-
 
   const predictionsContainerRef = useRef<HTMLDivElement | null>(null);
 
   // Scroller doucement jusqu'en haut du conteneur quand la liste change
   useEffect(() => {
-    // if (!predictionsContainerRef.current) return;
-    // if (frpredictions.length === 0) return;
-    // // petit délai pour s'assurer que le DOM est mis à jour
-    // const t = setTimeout(() => {
-    //   const el = predictionsContainerRef.current!;
-    //   el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
-    // }, 50);
-    // return () => clearTimeout(t);
-
-
     if (!predictionsContainerRef.current) return;
     const firstEl = predictionsContainerRef.current.children[0] as HTMLElement | null;
     if (firstEl && frpredictions.length > 0) {
@@ -495,22 +331,6 @@ export default function Home() {
     }
   };
 
-
-  // const [send, setSend] = useState<{ success?: string; error?: string }>({});
-  // useEffect(() => {
-  //   if (send.success) {
-  //     toast.success(send.success);
-  //     setTimeout(() => setSend({}), 1000);
-  //     return;
-  //   }
-  //   if (send.error) {
-  //     toast.error(send.error);
-  //     setTimeout(() => setSend({}), 1000);
-  //   }
-  // }, [send]);
-
-
-
   const [showImage, setShowImage] = useState(false);
 
   useEffect(() => {
@@ -520,21 +340,6 @@ export default function Home() {
     setShowImage(false);
     return () => clearTimeout(timer);
   }, []);
-
-  // const erasepredictions = localStorage.getItem("erasepredictions");
-  // useEffect(() => {    
-  //   if (erasepredictions === "true") {
-  //     const sid = (typeof crypto !== "undefined" && "randomUUID" in crypto)
-  //       ? (crypto).randomUUID()
-  //       : uuidv4();
-  //     localStorage.setItem('client_session_id', sid as string);
-  //     setFrpredictions([]);
-  //     setSid(sid);
-  //     localStorage.setItem("erasepredictions", "false")
-  //     toast.success("Toutes les prédictions ont été effacées !");
-  //   }
-  // }, [erasepredictions]);
-
 
   const clearAllPredictions = () => {
     const newSid = (typeof crypto !== "undefined" && "randomUUID" in crypto)
@@ -597,7 +402,6 @@ export default function Home() {
 
 
       <div className={`w-[75vw] md_body px48 bg-[#f7f5f35b] flex md:flex-row justify-between items-center md:gap-12 ${frpredictions.length !== 0 || upLoadedImages.length !== 0 ? "min-h-screen py-20" : "py-6 h-svh "} `}>
-        <div className="loader z-20"></div>
 
         <FeedBacK showFeedBack= {showFeedBack} />
 
@@ -609,9 +413,6 @@ export default function Home() {
               ? loading
                 ?
                 <div className="flex justify-center items-center">
-
-                  {/* <div className="loader1 z-20"></div> */}
-                  <div className="loader3 z-20"></div>
 
                   <div className="flex w-3/4 h-3/4 flex-col gap-4">
                     <div className="skeleton h-32 w-full"></div>
@@ -726,18 +527,6 @@ export default function Home() {
                 <GitCompareArrows size={17} color="#14a800" strokeWidth={1.75} />
               </button>
 
-              {/* <button
-                className="hidden btn btn-warning btn-sm h-9 w-9 p-2 bg-transparent border-green-200 hover:scale-105 transition-all"
-                onClick={() => { setIsCameraOpen(true) }}
-                disabled={true}
-              >
-                <Camera size={16} color="#14a800" strokeWidth={1.75} />
-              </button>
-              <CapturePictures setUpLoadedImages={setUpLoadedImages} setIsCameraOpen={setIsCameraOpen} isCameraOpen={isCameraOpen} /> */}
-
-
-
-
               <button
                 className="btn btn-error btn-sm h-9 w-9 p-2 bg-transparent hover:bg-red-200 hover:scale-105 transition-all"
                 onClick={() => {
@@ -751,8 +540,6 @@ export default function Home() {
 
             </div>
 
-            {/* <div className="input rounded-xl justify-center items-center gap-2 border-2 focus:border-amber-700">
-          </div> */}
             <fieldset className="fieldset">
 
               <legend className="flex flex-row justify-center text-sm text-center items-center fieldset-legend opacity-55">
@@ -770,7 +557,7 @@ export default function Home() {
                 multiple={true}
                 ref={clickInputFileRef}
               />
-              {/* <label className="label">Max size 2MB</label> */}
+              {/* <label className="label">Max size 3.5MB</label> */}
             </fieldset>
           </div>
 

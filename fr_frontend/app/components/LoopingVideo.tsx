@@ -1,11 +1,11 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type LoopingVideoProps = {
   src: string;
   className?: string;
-  // poster?: string;
+  poster?: string;
   autoPlay?: boolean;
   loop?: boolean;
   muted?: boolean;
@@ -16,7 +16,7 @@ type LoopingVideoProps = {
 export default function LoopingVideo({
   src,
   className,
-  // poster,
+  poster = "/assets/poster.png",
   // autoPlay = true,
   loop = true,
   muted = true,
@@ -55,7 +55,7 @@ export default function LoopingVideo({
       ref={vidRef}
       className={className}
       src={src}
-      // poster={poster}
+      poster={poster}
       // autoPlay={autoPlay}
       loop={loop}
       muted={muted}
