@@ -20,7 +20,6 @@ import "./globals.css";
 import { Sparkles } from "lucide-react";
 
 export default function Home() {
-  
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
@@ -216,7 +215,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="">
       {loading ? (
         <div className="flex justify-center items-center">
           <div className="loader3 z-20"></div>
@@ -229,7 +228,7 @@ export default function Home() {
       >
         <div className="flex flex-col w-[87vw] justify-center items-center text-center mt-10 mb-5">
           {/* phrase introductie accrochante */}
-          <div className="introtext text-[37px] md:text-6xl uppercase font-bold text-center mb-2">
+          <div className="introtext text-[2rem] md:text-6xl uppercase font-bold text-center mb-2">
             {/* Quand l’identité exige de la certitude. <br /> */}
             {/* Simple.
             Sûre.
@@ -289,13 +288,13 @@ export default function Home() {
         </div>
 
         <div
-          className="flex md_comparer mt-22 mb-5 H1 w-[96vw] items-center md:items-left justify-center gap-1 "
+          className="flex md_comparer mt-22 mb-7 H1 w-[96vw] items-center justify-center gap-1 "
           aria-label="Comparer de visages,"
         >
-          <div className="text-center md:w-fit ">
+          <div className="text-center md_comparer_c text-5xl w-full md:w-fit ">
             Comparer des visages,&nbsp;
           </div>
-          <div className="typewriter text-wrap"></div>
+          <div className="typewriter md_comparer_c text-center text-5xl text-wrap w-full md:w-fit "></div>
         </div>
 
         <div
@@ -306,9 +305,6 @@ export default function Home() {
             src={PredEx}
             unoptimized
             alt="Aperçu de l'image"
-            // width={1000}
-            // height={1250}
-            // priority
             loading="lazy"
             className="md:w-[70vw] md:h-[90vh] md_predex rounded-4xl"
           />
@@ -321,7 +317,6 @@ export default function Home() {
                   src={PredEx_1}
                   unoptimized
                   alt="Aperçu de l'image"
-                  // priority
                   loading="lazy"
                   className="md_predex1 md:hidden lg:hidden"
                 />
@@ -331,7 +326,6 @@ export default function Home() {
                   src={PredEx_2}
                   unoptimized
                   alt="Aperçu de l'image"
-                  // priority
                   loading="lazy"
                   className="md_predex1 md:hidden lg:hidden"
                 />
@@ -341,7 +335,6 @@ export default function Home() {
                   src={PredEx_3}
                   unoptimized
                   alt="Aperçu de l'image"
-                  // priority
                   loading="lazy"
                   className="md_predex1 md:hidden lg:hidden"
                 />
@@ -351,7 +344,6 @@ export default function Home() {
                   src={PredEx_4}
                   unoptimized
                   alt="Aperçu de l'image"
-                  // priority
                   loading="lazy"
                   className="md_predex1 md:hidden lg:hidden"
                 />
@@ -379,18 +371,18 @@ export default function Home() {
                   src={portraitgif}
                   unoptimized
                   alt="Aperçu de l'image"
-                  // priority
                   loading="lazy"
                   className=""
                 />
               </div>
-              <div className="absolute bottom-2 right-2 flex items-center justify-center text-xl font-medium text-center text-amber-700  w-9 h-9 rounded-4xl bg-base-300 ">
-                1
-              </div>
 
-              <div className="text-xl text-center mt-3 ">
+              <div className="text-xl text-center mt-2.5 ">
                 Assurez-vous, d'avoir des images contenant une personne par
                 image; et plus les visages sont visibles mieux c'est.
+              </div>
+
+              <div className="flex relative -right-[48%] top-3 items-center justify-center text-xl font-medium text-center text-amber-700  w-9 h-9 rounded-4xl bg-base-300 ">
+                1
               </div>
             </div>
 
@@ -403,20 +395,20 @@ export default function Home() {
                   src={sendgif}
                   unoptimized
                   alt="Aperçu de l'image"
-                  // priority
                   loading="lazy"
                   className=""
                 />
               </div>
-              <div className="absolute bottom-2 right-2 flex items-center justify-center text-xl font-medium text-center text-amber-700  w-9 h-9 rounded-4xl bg-base-300 ">
-                2
-              </div>
 
-              <div className="text-xl text-center mt-3 ">
+              <div className="text-xl text-center mt-2.5 ">
                 Importer les images que vous souhaitez comparer, et autant que
                 vous le désirez.
                 <br />
                 <br />
+              </div>
+
+              <div className="flex relative -right-[48%] top-2.5 items-center justify-center text-xl font-medium text-center text-amber-700  w-9 h-9 rounded-4xl bg-base-300 ">
+                2
               </div>
             </div>
 
@@ -429,18 +421,18 @@ export default function Home() {
                   src={choosegif}
                   unoptimized
                   alt="Aperçu de l'image"
-                  // priority
                   loading="lazy"
                   className=""
                 />
               </div>
-              <div className="absolute bottom-2 right-2 flex items-center justify-center text-xl font-medium text-center text-amber-700  w-9 h-9 rounded-4xl bg-base-300 ">
-                3
+
+              <div className="text-xl text-center mt-2.5 ">
+                Sélectionner les images que vous souhaitez comparer, et un model
+                (optionnel). Et comparer simplement.
               </div>
 
-              <div className="text-xl text-center mt-3 ">
-                Sélectionner les images que vous souhaitez comparer, et un model
-                (optionnel). Et comparer en toute simplicité.
+              <div className="flex relative -right-[48%] top-3 items-center justify-center text-xl font-medium text-center text-amber-700  w-9 h-9 rounded-4xl bg-base-300 ">
+                3
               </div>
             </div>
 
@@ -453,19 +445,19 @@ export default function Home() {
                   src={thumgif}
                   unoptimized
                   alt="Aperçu de l'image"
-                  // priority
                   loading="lazy"
                   className="h-18"
                 />
               </div>
-              <div className="absolute bottom-2 right-2 -z-10 flex items-center justify-center text-xl font-medium text-center text-amber-700  w-9 h-9 rounded-4xl bg-base-300 ">
-                4
-              </div>
 
-              <div className="text-xl text-center mt-3 ">
+              <div className="text-xl text-center mt-2.5 ">
                 Si le coeur vous en dit, en cas de mauvais résultat, n'hésitez
                 pas à nous le faire savoir pour que nous puissions améliorer
                 notre solution.
+              </div>
+
+              <div className="flex relative -right-[48%] top-3 items-center justify-center text-xl font-medium text-center text-amber-700 w-9 h-9 rounded-4xl bg-base-300 ">
+                4
               </div>
             </div>
           </div>
@@ -530,4 +522,3 @@ export default function Home() {
     </div>
   );
 }
-

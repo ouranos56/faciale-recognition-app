@@ -30,7 +30,7 @@ export default function RootLayout({
 
 }>) {
   return (
-    <html lang="fr" data-theme="silk" className={ubuntu.variable}>
+    <html lang="fr" data-theme="silk" className={`${ubuntu.variable}  selection:bg-base-content/75 selection:text-base-200`}>
 
       <body
         className={`${ubuntu.className} antialiased grid-lines`}

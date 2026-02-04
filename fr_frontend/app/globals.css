@@ -751,9 +751,6 @@ button {
     top: -5%;
     right: 2vw;
   }
-  .md_comparer {
-    flex-direction: column;
-  }
   .md_predex {
     display: none;
   }
@@ -798,6 +795,9 @@ button {
     width: 93vw;
     height: 100vh;
     margin: 0px;
+  }
+  .md_comparer_c{
+    font-size: 2.6rem;
   }
   .md_uploads{
     width: 85vw;
@@ -855,8 +855,15 @@ button {
     border-radius: 28px;
     color: oklch(70.4% 0.191 22.216);
   }
+   .cardImagesize{
+    width: 42vw;
+    height: 25vh;
+  } 
+  .cardImagecontainer{
+    gap: 5px;
+  }
 }
-@media screen and (max-width:950px) and (min-width:767px){
+@media screen and (max-width:950px) and (min-width:769px){
   .md_commencer_container {
     width: 96%;
     gap: 22px;
@@ -864,35 +871,27 @@ button {
   }
   
 }
+@media screen and (max-width:900px){
+  .md_comparer {
+    flex-direction: column;
+    gap: 20px;
+  }  
+}
 @media screen and (min-width:486px){
   .i_title{
-    /* bottom: ; */
     left: 70%;
   }
   
 }
-
 @media screen and (max-width:445px){
   .i_title{
-    /* bottom: ; */
     left: 65%;
   } 
 }
 @media screen and (max-width:375px){
   .i_title{
-    /* bottom: ; */
     left: 53%;
   }    
-}
-@media screen and (max-width:485px){
-  .cardImagesize{
-    width: 42vw;
-    height: 25vh;
-  } 
-  .cardImagecontainer{
-    gap: 5px;
-  }
-   
 }
 @media screen and (max-width: 700px) and (min-width:385px){
   .introduce_gif{
@@ -901,21 +900,20 @@ button {
   }
    
 }
-@media screen and (max-width: 385px){
+@media screen and (max-width: 386px){
   .introduce_gif{
     height: 60vh;
     width: 90vw;
   }
    
 }
-@media screen and (max-width:769px) and (min-width:485px){
+@media screen and (max-width:769px) and (min-width:484px){
   .md_body{
     width: 90vw;
     height: fit-content;
     flex-direction: column;
     gap: 30px;    
-  }
-  
+  }  
   .md_preds{
     width: 75vw;
     height: 110vh;
@@ -972,9 +970,7 @@ button {
     right: 2vw;
     width: 18vw;
   }
-  .md_comparer {
-    flex-direction: column;
-  }
+  
   
   .md_commencer_container {
     width: 85.0%;
@@ -1014,9 +1010,6 @@ button {
     right: 2vw;
     width: 18vw;
   }
-  .md_comparer {
-    flex-direction: row;
-  }
 }
 @media screen and (max-width:769px){
 .introtext {
@@ -1025,11 +1018,6 @@ button {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-}
-@media screen and (max-width:1020px) and (min-width:769px){
-  .md_comparer {
-    font-size: 2.5em;
-  }
 }
 
 
