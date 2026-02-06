@@ -848,13 +848,13 @@ button {
     gap: 5px;
   }
   .tour-tag::before {
-    top: -74%;
-    left: 0.2%;
+    top: -64.5% ;
+    left: -0.15%;
     width: 32px;
     height: 30px  ;
   }
   .tour-tag::after {
-    top: 39%;
+    top: 38%  ;
     left: 99.6%;
     width: 32px ;
     height: 34px;
@@ -1064,3 +1064,4 @@ button {
   }
 
 }
+
