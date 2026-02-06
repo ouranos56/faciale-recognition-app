@@ -238,18 +238,19 @@ export default function HomeClient() {
 
         <div className="top-[100vh] card_up h-fit mb-10 md:mb-22">
           <div className=" justify-center items-center h-fit px-2">
-            <LoopingVideo
+            {/* <LoopingVideo
               src="/assets/vid1.mp4"
               className="object-cover introduce_vid w-screen h-[60vh] md:w-[125vw] md:h-[140vh] "
-            />
-            {/* <Image
+            /> */}
+            <Image
               src="/assets/vid1.gif"
               alt="Aperçu de l'image"
               width={1200}
               height={800}
-              loading="lazy"
+              loading="eager"
+              draggable={false}
               className="introduce_gif md:w-[125vw] md:h-[140vh]  object-cover"
-            /> */}
+            />
           </div>
         </div>
 
