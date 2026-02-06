@@ -245,6 +245,7 @@ export default function HomeClient() {
             <Image
               src="/assets/vid1.gif"
               alt="Aperçu de l'image"
+              unoptimized
               width={1200}
               height={800}
               loading="eager"
@@ -522,4 +523,5 @@ export default function HomeClient() {
       </div>
     </div>
   );
+
 }
