@@ -517,17 +517,17 @@ button {
   content: "iho";
   position: relative;
   color: transparent;
-  top: 1.8px;
-  right: 86.8px;
+  top: 1.5px;
+  right: 87px;
   height: 7vh;
   width: 12vw;
-  -webkit-mask: radial-gradient(circle at 15% 84%, transparent 0 29px, black 29px);
-  mask: radial-gradient(circle at 15% 84%, transparent 0 29px, black 29px);
+  -webkit-mask: radial-gradient(circle at 18% 83%, transparent 0 26px, black 26px);
+  mask: radial-gradient(circle at 18% 83%, transparent 0 26px, black 26px);
   background-color: #f7f4f2;
   padding: 4px;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  z-index: -1;
 }
 .tour-header::after {
   content: "iho";
@@ -621,50 +621,54 @@ button {
   position: absolute;
   bottom: -0.2px;
   left: -0.3px;
+  /* width: 9em; */
+  /* height: 3em; */
+  justify-content: center ;
+  align-items: center;
+  text-align: center;
   background-color: #f7f4f2;
   border-bottom-left-radius: 10px;
   border-top-right-radius: 13px;
-  padding: 1px;
+  padding: 5px;
   z-index: 10;
 }
 .tour-tag::before {
-  content: "iho";
-  position: relative;
-  color: transparent;
-  bottom: 37px;
-  left: -2px;
-  height: 7vh;
-  width: 12vw;
-  -webkit-mask: radial-gradient(circle at 0% 0%, transparent 27px 0, black 27px);
-  mask: radial-gradient(circle at 88% 14%, transparent 27px 0, black 27px);
-  background-color: #f7f4f2;
+  content: "";
+  justify-content: center;
+  position: absolute;
+  top: -55%;
+  left: 0%;
+  width: 32px;
+  height: 30px;
+  -webkit-mask: radial-gradient(circle at 82% 17%, transparent 0 26px, black 26px);
+  mask: radial-gradient(circle 45px at 90% 3%, transparent 0 65%, black 65%);
+  background-color: #f7f4f2 ;
   padding: 4px;
   justify-content: center;
   align-items: center;
-}
+}  
 .tour-tag::after {
-  content: "iho";
-  position: relative;
-  color: transparent;
-  bottom: -13px;
-  left: 28px;
-  height: 7vh;
-  width: 12vw;
-  -webkit-mask: radial-gradient(circle at 0% 0%, transparent 0 27px, black 27px);
-  mask: radial-gradient(circle at 90% 12%, transparent 0 27px, black 27px);
-  background-color: #f7f4f2;
+  content: "";
+  justify-content: center;
+  position: absolute;
+  top: 43%;
+  left: 99.6%;
+  width: 30px;
+  height: 28px;
+  -webkit-mask: radial-gradient(circle at 82% 17%, transparent 0 26px, black 26px);
+  mask: radial-gradient(circle 45px at 90% 3%, transparent 0 65%, black 65%);
+  background-color: #f7f4f2 ;
   padding: 4px;
   justify-content: center;
   align-items: center;
-  z-index: -1;
-}
+} 
 
 .hiking-tag {
   display: inline-block;
+  position: relative;
   background: var(--background-color);
   backdrop-filter: blur(8px);
   padding: 6px 12px;
-  margin: 5px -30px;
   border-radius: 16px;
   color: var(--primary-color);
   font-weight: 650;
@@ -725,14 +729,11 @@ button {
   .tour-card-minimal {
     max-width: 100%;
     margin: 0 16px;
-  }
-
-  
+  }  
   .more-link {
     font-size: 13px;
     padding: 6px 12px;
-  }
-  
+  }  
   .hiking-tag {
     font-size: 12px;
     padding: 5px 10px;
@@ -764,17 +765,7 @@ button {
     width: 90%;
     height: fit-content;
     gap: 22px;
-    flex-direction: column;
-
   }
-  /* .tour-image{
-    height: 65vh;
-    width: 96vw;
-  }
-  .tour-image-container{
-    height: 65vh;
-    width: 96vw;
-  } */
   .tour-card{
     height: 40vh;
     width: 96vw;
@@ -861,6 +852,18 @@ button {
   } 
   .cardImagecontainer{
     gap: 5px;
+  }
+  .tour-tag::before {
+    top: -75%;
+    left: 0.2%;
+    width: 32px;
+    height: 30px  ;
+  }
+  .tour-tag::after {
+    top: 39%;
+    left: 99.6%;
+    width: 32px ;
+    height: 34px;
   }
 }
 @media screen and (max-width:950px) and (min-width:769px){
@@ -974,10 +977,7 @@ button {
   
   .md_commencer_container {
     width: 85.0%;
-    /* height: fit-content; */
     gap: 22px;
-    flex-direction: column;
-
   }
   .tour-card{
     height: 34vh;
@@ -1012,12 +1012,15 @@ button {
   }
 }
 @media screen and (max-width:769px){
-.introtext {
-  background: linear-gradient(180deg, #052800f3 60%, #f3ede976 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+  .introtext {
+    background: linear-gradient(180deg, #052800f3 60%, #f3ede976 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .md_commencer_container {
+    flex-direction: column;
+  }
 }
 
 

@@ -5,14 +5,15 @@ interface CardImageProps {
   src: string;
   alt: string;
   sizeClass?: string;
+  className?: string;
   priority?: boolean;
   loading?: "eager" | "lazy";
 }
 
-const CardImage: React.FC<CardImageProps> = ({ src, alt, sizeClass,  priority, loading }) => {
+const CardImage: React.FC<CardImageProps> = ({ src, alt, sizeClass, className, priority, loading }) => {
   return (
     <div className='avatar '>
-      <div className={` mask  mask-squircle ${sizeClass} overscroll-contain bg-center bg-cover`}>
+      <div className={` mask mask-squircle ${sizeClass} ${className || ''} overscroll-auto bg-center bg-cover`}>
         <Image
           src={src}
           alt={alt}

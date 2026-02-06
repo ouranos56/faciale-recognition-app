@@ -62,6 +62,20 @@ const UpLoadedImageCard = ({ images, handlesetselectedImages, loadingpage }: UpL
 
     }
 
+    const toggleCheckbox = (index: number, img: File) => {
+        if (loadingpage) return;
+        handlesetselectedImages(img);
+        const currently = !!checkedItems[index];
+        if (currently) {
+            setCheckedItems((prev) => ({ ...prev, [index]: false }));
+            setSelectedCount((prev) => (prev > 0 ? prev - 1 : 0));
+            return;
+        }
+        if (selectedCount >= 2) return;
+        setCheckedItems((prev) => ({ ...prev, [index]: true }));
+        setSelectedCount((prev) => prev + 1);        
+    };
+
     useEffect(() => {
         if (loadingpage) {
             setCheckedItems({});
@@ -75,18 +89,26 @@ const UpLoadedImageCard = ({ images, handlesetselectedImages, loadingpage }: UpL
                 return (
                     <div key={item.key}>
 
-                        <div className="card1 card card-sm p-0.5">
+                        <div 
+                            className="card1 card card-sm p-0.5"
+                            onClick={(e) => {
+                                // si on clique directement sur l'input, laisser son onChange gérer
+                                const tgt = e.target as HTMLElement;
+                                if (tgt && tgt.tagName.toLowerCase() === "input") return;
+                                e.preventDefault();
+                                toggleCheckbox(i, item.file);
+                            }}
+                        >
                             <input
                                 type="checkbox"
                                 name={`checkbox-${i}`}
                                 id={`checkbox-${i}`}
                                 checked={!!checkedItems[i] || false}
                                 onChange={(e) => handleCheckboxChange(e, i, item.file)}
-                                className=" checkbox checkbox-success absolute top-3.5 right-1 z-[8] bg-white/80 border-2 rounded-md w-5 h-5 hover:border-green-400 transition-colors checked:text-green-500 checked:border-green-500"
+                                disabled={loadingpage}
+                                className=" checkbox checkbox-success absolute top-3.5 right-1 z-[8] bg-white/80 border-2 rounded-md w-5 h-5 hover:border-green-400 transition-colors checked:text-green-500 checked:border-green-500 disabled:bg-gray-200 disabled:opacity-65 disabled:cursor-auto"
                             />
 
-                            {/* <div className="peer-checked:border-green-500 card card-sm p-0.5 border-2 border-transparent rounded-md transition-colors">
-                            </div> */}
                             <CardImage
                                 src={item.url}
                                 alt={`Uploaded Image ${i}`}

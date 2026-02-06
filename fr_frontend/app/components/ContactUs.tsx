@@ -104,7 +104,7 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
                     <form
                         method="get"
                         action=""
-                        className="justify-center items-center w-[100%] pl15"
+                        className="justify-center items-center w-full pl15"
                         onSubmit={(e) => handSubmit(e)}
                     >
                         <div className="">
@@ -112,7 +112,7 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
                                 <span>Your First Name</span>
                                 <input
                                     type="text"
-                                    className="input validator input-md w-[100%]"
+                                    className="input validator input-md w-full"
                                     required
                                     placeholder="Klaus"
                                     pattern="[A-Za-z][A-Za-z0-9\-]*"
@@ -138,7 +138,7 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
                                 <input
                                     type="text"
                                     placeholder="MIKAELSON"
-                                    className="input input-md w-[100%]"
+                                    className="input input-md w-full"
                                     value={lastname
                                         // formData.name
                                     }
@@ -156,7 +156,8 @@ export default function SuscribeModal({ setSend }: contactUsProps) {
                                 <span>Your Email</span>
                                 <input
                                     type="email"
-                                    className="input validator input-md w-[100%]"
+                                    name="email"
+                                    className="input validator input-md w-full"
                                     required
                                     placeholder="mail@site.com"
                                     value={email

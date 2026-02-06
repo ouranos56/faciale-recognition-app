@@ -2,7 +2,6 @@
 
 import "../globals.css";
 import { useEffect, useRef, useState } from "react";
-import HellohHand from "../assets/wired-outline-2716-logo-clubhouse-hover-pinch.gif";
 import Image from "next/image";
 import { Mail } from "lucide-react";
 
@@ -61,12 +60,11 @@ export default function AboutUs() {
                     <div className=" mt-[-3%] flex flex-row justify-center items-center text-[#bb4d00] font-medium text-lg">
                         Hello!
                         <Image
-                            src={HellohHand}
+                            src="/assets/wired-outline-2716-logo-clubhouse-hover-pinch.gif"
                             unoptimized
                             alt="Gif Hand do hello"
                             width={60}
                             height={60}
-                            priority
                             className={`pl-1 opacity-40 hover:opacity-50 transition-opacity duration-300`}
                         />
                     </div>

@@ -1,0 +1,540 @@
+"use client"
+
+import React, { useState, useEffect, useCallback, useRef, /*useCallback*/ } from "react";
+import fr_api from "../fr_api";
+import "../globals.css";
+import toast from "react-hot-toast";
+import { v4 as uuidv4 } from "uuid";
+import PredictCard from "../components/PredictCard";
+import UpLoadedImageCard from "../components/UpLoadedImageCard";
+import { useCtrlI } from "../hookq/useCtrlI";
+import { useEnter } from "../hookq/useEnter";
+import { BrushCleaning, ClockArrowUp, GitCompareArrows} from "lucide-react";
+import Image from "next/image";
+// import CapturePictures from "../components/CapturePictures";
+import FeedBacK from "../components/FeedBack";
+
+// export
+type FRApiresponse = {
+  id: string;
+  img1_url: string;
+  img2_url: string;
+  selected_model: number;
+  prediction: string;
+  rigthprediction: string;
+  date_uploaded: string;
+  session_id: string;
+};
+
+
+
+// Fonction utilitaire pour parser la prédiction
+const parsePredictionValue = (prediction: string | null | undefined): boolean => {
+  if (!prediction) return false;
+  try {
+    const [value] = prediction.split('_').map(Number);
+    return value !== 0;
+  } catch (error) {
+    console.error('Erreur lors du parsing de la prédiction:', error);
+    return false;
+  }
+};
+
+export default function ClientContent() {
+  const [frpredictions, setFrpredictions] = useState<FRApiresponse[]>([]);
+  const [newU, setNewU] = useState<boolean>(true);
+  const [sid, setSid] = useState<string | null>(null);
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [loadingPage, setLoadingPage] = useState<boolean>(false);
+  const [loadingPostPred, setLoadingPostPred] = useState<boolean>(false);
+  const [loadedBtn, setUpLoadedBtn] = useState<boolean>(false);
+
+  const [upLoadedImages, setUpLoadedImages] = useState<File[]>([]);
+  const [selectedImages, setselectedImages] = useState<File[]>([]);
+
+  const selectedModelRef = useRef<HTMLSelectElement>(null);
+  const [selectedmodel, setSelectedmodel] = useState<number>(0);
+
+  const clickInputFileRef = useRef<HTMLInputElement>(null);
+  const clickSendPredictFilesRef = useRef<HTMLButtonElement>(null);
+
+
+  const getOrCreateClientSessionId = () => {
+    const raw = localStorage.getItem('client_session_id');
+    let sid = raw;
+    if (raw === 'undefined' || raw === null) {
+        sid = "";   
+        setNewU(true);     
+        localStorage.setItem('client_session_id', sid as string);
+    } else { setNewU(false) }
+    
+    setSid(sid);
+
+    const sid_erase = localStorage.getItem('sid_erase');
+    if (sid_erase == "false") {
+      localStorage.setItem('sid_erase', "true");
+    }
+
+    return sid;
+  };
+
+  // Utiliser avant tout fetch
+  useEffect(() => {
+    getOrCreateClientSessionId();
+  }, []);
+
+
+  const getPredictions = useCallback(async () => {
+    setLoading(true);
+    try {
+        const res = await fr_api.get<FRApiresponse[]>("predictions/", {
+            params: { session_id: sid }
+        });
+
+        setFrpredictions(res.data ?? []);
+
+        if (!newU && res.data.length > 0) {
+            toast.success("Prédictions récupérées avec succès !");
+            // on récupre session_id de res et le stock dans localstorage
+            const returned_sid = res.data[0].session_id;
+            setSid(returned_sid);
+            localStorage.setItem('client_session_id', returned_sid);
+        }
+
+    } catch (error) {
+      console.error("Erreur de récupération des prédictions:", error);
+
+      if (!newU) {
+        toast.error("Erreur de récupération des prédictions !");
+      }
+    } 
+    setLoading(false);
+  }, [newU, sid]);
+
+  const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+
+    const files = event.target.files;
+    if (!files || files.length === 0) {
+      return;
+    }
+
+    // Vérifier la taille de chaque fichier (3.5MB max)
+    const MAX_FILE_SIZE = 3.5 * 1024 * 1024; // 3.5MB en bytes
+    const oversizedFiles: string[] = [];
+    const autorizedFiles: File[] = [];
+
+    Array.from(files).forEach((file) => {
+      if (file.size > MAX_FILE_SIZE) {
+        oversizedFiles.push(file.name);
+      }else{
+        autorizedFiles.push(file);
+      }
+    });
+
+    if (oversizedFiles.length > 0) {
+      toast.error(`${oversizedFiles.length} fichier(s) volumineux (max 3.5MB)`);
+      
+    }
+
+    setUploading(true);
+
+    // Ajouter un délai de 2.5 secondes avant de mettre à jour l'état
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    setUpLoadedImages(prev => Array.isArray(prev) ? [...autorizedFiles, ...prev] : Array.from(files));
+    setUploading(false);
+  };
+
+  const handleSendCorrection = async (id: string, rightprediction: number) => {
+    try {
+      // Créer une promesse qui combine la requête API et le délai
+      const reqpromise = fr_api.patch(
+        `predictions/${id}/`,
+        {
+          rightprediction: rightprediction
+        }
+      ).then(async response => {
+
+        // Ajouter un délai de 2 secondes après la réponse
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        return response; // Retourner la réponse pour la chaîne de promesses
+      });
+
+      // Utiliser toast.promise avec la promesse modifiée
+      toast.promise(
+        reqpromise,
+        {
+          loading: 'Envoi de la correction...',
+          success: 'Correction envoyée avec succès !\n\nMerci pour votre contribution !',
+          error: 'Erreur lors de l\'envoi de la correction !',
+        },
+        {
+          duration: 3000, // Durée d'affichage des toasts success/error
+        }
+      )
+
+    } catch (error) {
+      console.error("Erreur lors de l'envoi de la correction:", error);
+    }
+  }
+
+  const handlesetselectedImages = (img: File) => {
+    setselectedImages((prevImgs) => {
+      const newImg = prevImgs.includes(img)
+        ? prevImgs.filter((i) => i !== img)  // Désélection
+        : prevImgs.length < 2                 // Vérification de la limite
+          ? [...prevImgs, img]                // Sélection
+          : prevImgs;                         // Pas de changement si déjà 2 sélectionnées
+
+      return newImg;
+    });
+  };
+
+  const handlePostImageToPredict = async () => {
+    setLoadingPage(true);
+    let loadingToast= "";
+    try {
+
+        if (selectedImages.length !== 2) {
+            toast.error("Veuillez sélectionner 2 images")
+            throw new Error("Veuillez sélectionner exactement 2 images");
+        }
+
+        const file1 = selectedImages[0];
+        const file2 = selectedImages[1];
+        const selected_model = selectedmodel;
+        const sid = getOrCreateClientSessionId();
+
+        loadingToast = toast.loading("Envoi des images pour prédiction...");
+
+        // FormData pour envoyer les fichiers
+        const formData = new FormData();
+
+        formData.append('img1', file1);
+        formData.append('img2', file2);
+        formData.append('selected_model', selected_model.toString());
+        formData.append('session_id', sid as string || "");
+
+        // Envoyer la requête avec FormData
+        const res = await fr_api.post(
+            'predictions/',
+            formData,
+            {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            }
+        );
+
+        toast.dismiss(loadingToast);
+        toast.success("Images envoyées avec succès !");
+
+        setLoading(true);
+
+        // Récupérer les nouvelles prédictions
+        // la prédiction est déjà prête ici
+        setFrpredictions((prev) => [res.data, ...prev]);
+
+        // on récupre session_id de res et le stock dans localstorage
+        const returned_sid = [res.data][0].session_id;
+        setSid(returned_sid);
+        localStorage.setItem('client_session_id', returned_sid);
+
+        setselectedImages([]);
+
+        setLoading(false);
+    } catch (error) {
+      toast.dismiss(loadingToast);
+      console.error("Erreur lors de l'envoi des images:", error);
+      if (selectedImages.length === 2) {
+        toast.error("Erreur lors de l'envoi des images !");
+      }
+    }
+    setLoadingPage(false);
+    
+  };
+
+  useEffect(() => {
+    // Ne pas appeler si sid n'est pas encore défini
+    if (sid) {
+      getPredictions();
+    }
+  }, [getPredictions, sid]);
+
+  const onCtrlI = useCallback(() => {
+    clickInputFileRef.current?.click();
+  }, []);
+
+  useCtrlI(onCtrlI);
+
+  const onEnter = useCallback(() => {
+    clickSendPredictFilesRef.current?.click();
+  }, []);
+
+  useEnter(onEnter);
+
+  const predictionsContainerRef = useRef<HTMLDivElement | null>(null);
+
+  // Scroller doucement jusqu'en haut du conteneur quand la liste change
+  useEffect(() => {
+    if (!predictionsContainerRef.current) return;
+    const firstEl = predictionsContainerRef.current.children[0] as HTMLElement | null;
+    if (firstEl && frpredictions.length > 0) {
+      // ex: scroller doucement jusqu'au premier
+      firstEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // ou faire autre chose : firstEl.querySelector('img') etc.
+    }
+  }, [frpredictions]);
+
+
+
+  const scrollToPred = () => {
+    if (!predictionsContainerRef.current) return;
+
+    const firstEl = predictionsContainerRef.current.children[0] as HTMLElement | null;
+    if (firstEl) {
+      // ex: scroller doucement jusqu'au premier
+      firstEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // ou faire autre chose : firstEl.querySelector('img') etc.
+    }
+  };
+
+  const [showImage, setShowImage] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowImage(true);
+    }, 120);
+    setShowImage(false);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const clearAllPredictions = () => {
+    localStorage.setItem('client_session_id', "");
+    localStorage.setItem("erasepredictions", "false");
+
+    setFrpredictions([]);
+    setSid("");
+    toast.success("Toutes les prédictions ont été effacées !");
+  };
+
+  // Listener localStorage pour détecter les changements depuis Header
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const eraseflag = localStorage.getItem("erasepredictions");
+      if (eraseflag === "true") {
+        clearAllPredictions();
+      }
+      localStorage.removeItem("erasepredictions");
+    };
+
+    // Écouter les changements localStorage
+    window.addEventListener('storage', handleStorageChange);
+
+    // Vérifier au montage
+    handleStorageChange();
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  
+  const [showFeedBack, setShowFeedBack] = useState<boolean>(false);
+
+  useEffect(() => {
+    const feedbackFlag = localStorage.getItem("showfeedback");
+
+    if (!feedbackFlag) {
+      localStorage.setItem("showfeedback", "false");
+    }
+    
+    if (frpredictions && feedbackFlag === "false" && frpredictions.length >= 3) {
+      
+      const timer = setTimeout(() => {
+      setShowFeedBack(true);
+      localStorage.setItem("showfeedback", showFeedBack.toString());
+      }, 30000); 
+      return () => clearTimeout(timer);
+    }else {
+      setShowFeedBack(false);
+    }    
+  }, [frpredictions, showFeedBack]);
+  
+  return (
+    <>
+      <div className={`w-[75vw] md_body px48 bg-[#f7f5f35b] flex md:flex-row justify-between items-center md:gap-12 ${frpredictions.length !== 0 || upLoadedImages.length !== 0 ? "min-h-screen py-20" : "py-6 h-svh "} `}>
+
+        <FeedBacK showFeedBack= {showFeedBack} />
+
+        <div className={`bg-base-100 md_preds shadow-xl rounded-box border-3 border-base-content/12 justify-center items-center gap-4 p-2 overflow-auto md:overflow-scroll uploadedimagecard md:w-[80%] ${frpredictions.length === 0 ? "max-h-min" : " h-[90vh]"}`}
+          ref={predictionsContainerRef}
+        >
+          {
+            frpredictions.length === 0
+              ? loading
+                ?
+                <div className="flex justify-center items-center">
+
+                  <div className="flex w-3/4 h-3/4 flex-col gap-4">
+                    <div className="skeleton h-32 w-full"></div>
+                    <div className="skeleton h-4 w-28"></div>
+                    <div className="skeleton h-4 w-full"></div>
+                    <div className="skeleton h-4 w-full"></div>
+                  </div>
+                </div>
+
+                : <div className="flex justify-center items-center p-3">
+
+                  <Image
+                    src="/assets/social-distance.gif"
+                    alt="Aperçu de l'image"
+                    unoptimized
+                    width={250}
+                    height={250}
+                    loading="eager"
+                    className={`opacity-40 hover:opacity-55 transition-opacity duration-300 ${showImage ? 'flex' : 'hidden'}`}
+                  />
+                </div>
+
+              : (<div className="mdpredsc justify-center items-center">
+                <div className={`flex my-4 h-3/4 flex-col gap-4 ${loadingPostPred ? 'flex' : 'hidden'}`}>
+                  <div className="skeleton h-32 w-full"></div>
+                  <div className="skeleton h-4 w-28"></div>
+                  <div className="skeleton h-4 w-full"></div>
+                  <div className="skeleton h-4 w-full"></div>
+                </div>
+
+                {frpredictions.map((fr, i) => (
+                  <PredictCard
+                    key={"predictcard-" + fr.id}
+                    fr={fr}
+                    index={frpredictions.length - i}
+                    predValue={parsePredictionValue(fr.prediction)}
+                    handleSendCorrection={handleSendCorrection}
+                  />
+                ))}
+              </div>)
+          }
+        </div>
+
+        <div className={`card md_uploads bg-base-200/65 shadow-xl/20 mb-5 p-3 flex flex-col justify-between items-center gap-3 md:w-3/6 ${frpredictions.length === 0 || upLoadedImages.length === 0 ? "max-h-min" : "h-[85vh] "}`}>
+          {
+            upLoadedImages.length === 0
+              ? loading && !loadedBtn
+                ? (
+                  <div className="grid grid-cols-2 gap-2.5 border-dashed border-accent/15 border-4 p-2 justify-center items-center rounded-2xl">
+                    <div className="skeleton h-32 w-30"></div>
+                    <div className="skeleton h-32 w-30"></div>
+                  </div>
+                )
+
+                : <div className="flex justify-center items-center border-dashed border-accent/15 border-bb4e0041 border-4 rounded-2xl py-0.5">
+                  {showImage && (
+                    <Image
+                      src="/assets/picture.gif"
+                      unoptimized
+                      alt="Aperçu de l'image"
+                      width={225}
+                      height={225}
+                      className={`opacity-40 hover:opacity-50 transition-opacity duration-300 ${showImage ? 'block' : 'hidden'}`}
+                    />
+                  )}
+                </div>
+
+              : (<div className="border-dashed border-accent/15 border-bb4e0041 border-4 rounded-2xl overflow-auto md:overflow-scroll uploadedimagecard max-h-[55vh] w-[85%] ">
+                {
+                  uploading
+                    ? <div className="grid grid-cols-2 gap-2.5">
+                      <div className="skeleton h-32 w-32"></div>
+                      <div className="skeleton h-32 w-32"></div>
+                    </div>
+                    : null
+                }
+
+                <UpLoadedImageCard
+                  images={upLoadedImages}
+                  handlesetselectedImages={handlesetselectedImages}
+                  loadingpage={loadingPage}
+                />
+              </div>)
+          }
+
+
+          <div className="flex flex-col justify-center items-center gap-4">
+
+            <select
+              className="select select-sm font-medium rounded-xl px-2 focus-within:border-0 cursor-pointer"
+              ref={selectedModelRef}
+              value={selectedmodel}
+              onChange={(e) => { setSelectedmodel(Number(e.target.value)) }}
+            >
+              <option disabled={true}>Models</option>
+              <option className="checked:text-[#bb4d00]" defaultChecked value={0} >Ediya s.2</option>
+              <option className="checked:text-[#bb4d00]" value={1} >Ediya s.06</option>
+            </select>
+
+            <div className="flex flex-row justify-center w-full items-center gap-4">
+              <button className="btn btn-soft h-9 p-3 bg-transparent hover:bg-green-200 hover:scale-105 transition-all border-2 border-green-500 hover:border-green-00 text-green-600 hover:text-green-800 btn-success btn-sm"
+                onClick={() => {
+                  handlePostImageToPredict();
+                  if (newU) setNewU(false);
+                }}
+                disabled={loadingPage}
+                title="Ctrl + Enter"
+                ref={clickSendPredictFilesRef}
+              >Comparer
+                <GitCompareArrows size={17} color="#14a800" strokeWidth={1.75} />
+              </button>
+
+              <button
+                className="btn border-2 border-red-300 btn-sm h-9 w-9 p-2 bg-transparent hover:bg-red-200 hover:scale-105 transition-all"
+                onClick={() => {
+                  setUpLoadedImages([]);
+                  setselectedImages([]);
+                }}
+                disabled={loadingPage}
+                title="Tout retirer"
+              >
+                <BrushCleaning size={17} color="#ff4242" strokeWidth={1.75} />
+              </button>
+
+            </div>
+
+            <fieldset className="fieldset">
+
+              <legend className="flex flex-row justify-center text-sm text-center items-center fieldset-legend opacity-55">
+                Importer des images
+                <div className="flex flex-row justify-center items-center gap-1 ">
+                  <kbd className="kbd kbd-sm text-amber-700">Ctrl/⌘</kbd>
+                  <p className="text-lg text-amber-700">+</p>
+                  <kbd className="kbd kbd-sm text-amber-700">i</kbd>
+                </div>
+
+              </legend>
+
+              <input type="file" accept="image/*" className="file-input rounded-xl hover:shadow-md hover:border-amber-800/50"
+                onChange={(e) => { handleImageChange(e); setUpLoadedBtn(true); }}
+                multiple={true}
+                ref={clickInputFileRef}
+              />
+              {/* <label className="label">Max size 3.5MB</label> */}
+            </fieldset>
+          </div>
+
+        </div>
+
+
+        <button
+          className="btn btn-ghost btn-circle btnscroll fixed bottom-10 right-8"
+          onClick={() => scrollToPred()}
+          title="Remonter à la dernière prédction!"
+        >
+          <ClockArrowUp size={30} color="#b95b04" strokeWidth={2} />
+        </button>
+      </div>
+    </>
+  );
+}
