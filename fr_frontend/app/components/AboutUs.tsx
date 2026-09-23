@@ -88,7 +88,7 @@ export default function AboutUs() {
                         <div className="my-3.25"></div>Notre ambition est de <span className="text-[#bb4d00] font-normal ">créer un modèle capable de rivaliser avec les leaders mondiaux</span>, tout en portant une <span className="font-normal">signature africaine</span> forte : l’ingéniosité, l&apos;accessibilité, la résilience et la créativité.
 
                         <div className="my-3.25 font-normal">Rejoindre ce projet, c’est participer à l’écriture d’un nouveau chapitre de la tech africaine, plus créatif, plus audacieux et plus influent.</div>
-                        <div className="my-3.25 font-normal">WETOHOSSOU Lucien</div>
+                        <div className="my-3.25 font-normal">WETOHOSSOU Lucien <a href="https://github.com/ouranos56/faciale-recognition-app.git">GitHub: ouranos56</a></div>
                         
                     </div>
                     <div className="text-[#bb4d00] text-lg font-normal flex flex-row text-center justify-center items-center"><Mail size={30} strokeWidth={1} />&nbsp;frinnovagen56bj@gmail.com</div>
