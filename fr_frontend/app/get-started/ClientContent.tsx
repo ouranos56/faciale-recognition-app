@@ -365,11 +365,9 @@ export default function ClientContent() {
   
   return (
     <>
-      <div className=" selfcenter w-[50vw] max-md:w-[85vw] text-amber-400/80 text-[18px] text-center bg-amber-400/8 backdrop-blur-[2px] rounded-xl p-2 " >La reconnaissance d’image est temporairement indisponible pour des raisons financières liées au paiement de l’hébergeur.</div>
+      <div className=" w-[50vw] max-md:w-[85vw] textamber-400/80 text-[22px] text-center bg-amber-400/15 backdrop-blur-[2px] rounded-xl p-2 " >La reconnaissance d’image est temporairement indisponible pour des raisons financières liées au paiement de l’hébergeur.</div>
       <div className={` relative w-[75vw] md_body px48 bg-[#f7f5f35b] flex justify-between items-center md:gap-12 ${frpredictions.length !== 0 || upLoadedImages.length !== 0 ? "min-h-screen py-20" : "py-6 h-svh "} `}>
 
-      {/* <div className=" absolute top-0 right-1/2 translate-x-1/2 w-[50vw] max-md:w-[85vw] text-amber-400/80 text-[18px] text-center bg-amber-400/8 backdrop-blur-[2px] rounded-xl p-2 " >La reconnaissance d’image est temporairement indisponible pour des raisons financières liées au paiement de l’hébergeur.</div> */}
-        
         <FeedBacK showFeedBack= {showFeedBack} />
 
         <div className={`bg-base-100 md_preds shadow-xl rounded-box border-3 border-base-content/12 justify-center items-center gap-4 p-2 overflow-auto md:overflow-scroll uploadedimagecard md:w-[80%] ${frpredictions.length === 0 ? "max-h-min" : " h-[90vh]"}`}
