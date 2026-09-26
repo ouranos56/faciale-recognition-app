@@ -367,7 +367,7 @@ export default function ClientContent() {
     <>
       <div className={` relative w-[75vw] md_body px48 bg-[#f7f5f35b] flex justify-between items-center md:gap-12 ${frpredictions.length !== 0 || upLoadedImages.length !== 0 ? "min-h-screen py-20" : "py-6 h-svh "} `}>
 
-      <div className=" absolute top-[3vh] right-1/2 translate-x-1/2 text-amber-400/80 text-[18px] text-center bg-[#f7f5f35b] amber-400/8 backdrop-blur-[2px] rounded-xl p-2 " >La reconnaissance d’image est temporairement indisponible pour des raisons financières liées au paiement de l’hébergeur.</div>
+      <div className=" absolute top-0 [3vh] right-1/2 translate-x-1/2 text-amber-400/80 text-[18px] text-center bg-amber-400/8 backdrop-blur-[2px] rounded-xl p-2 " >La reconnaissance d’image est temporairement indisponible pour des raisons financières liées au paiement de l’hébergeur.</div>
         
         <FeedBacK showFeedBack= {showFeedBack} />
 
